@@ -11,4 +11,10 @@ class PageController extends Controller
     {
         return view("main");
     }
+
+
+    public function shop()
+    {
+        return view("shop");
+    }
 }

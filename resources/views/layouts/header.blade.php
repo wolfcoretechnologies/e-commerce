@@ -165,7 +165,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="lvl1 parent megamenu"><a href="#">Shop <i class="anm anm-angle-down-l"></i></a>
+                        <li class="lvl1 parent megamenu"><a href="{{ route('shop') }}">Shop <i class="anm anm-angle-down-l"></i></a>
                             <div class="megamenu style4">
                                 <ul class="grid grid--uniform mmWrapper">
                                     <li class="grid__item lvl-1 col-md-3 col-lg-3"><a href="#"
