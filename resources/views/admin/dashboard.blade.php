@@ -1,477 +1,371 @@
+
 @extends('admin.layouts.app')
-@section('content')
-    <div class="pd-ltr-20 xs-pd-20-10">
-        <div class="min-height-200px">
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <div class="title">
-                            <h4>Tabs</h4>
-                        </div>
-                        <nav aria-label="breadcrumb" role="navigation">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">UI Tabs</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}">
 
-            <div class="row clearfix">
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                    <div class="pd-20 card-box">
-                        <h5 class="h4 text-blue mb-20">Default Tab</h5>
-                        <div class="tab">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active text-blue" data-toggle="tab" href="#home" role="tab"
-                                        aria-selected="true">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-blue" data-toggle="tab" href="#profile" role="tab"
-                                        aria-selected="false">Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-blue" data-toggle="tab" href="#contact" role="tab"
-                                        aria-selected="false">Contact</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="contact" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                    <div class="pd-20 card-box">
-                        <h5 class="h4 text-blue mb-20">Customtab Tab</h5>
-                        <div class="tab">
-                            <ul class="nav nav-tabs customtab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"
-                                        aria-selected="true">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"
-                                        aria-selected="false">Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#contact2" role="tab"
-                                        aria-selected="false">Contact</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="home2" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile2" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="contact2" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                    <div class="pd-20 card-box">
-                        <h5 class="h4 text-blue mb-20">vertical Tab</h5>
-                        <div class="tab">
-                            <div class="row clearfix">
-                                <div class="col-md-3 col-sm-12">
-                                    <ul class="nav flex-column vtabs nav-tabs" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home3" role="tab"
-                                                aria-selected="true">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile3" role="tab"
-                                                aria-selected="false">Profile</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#contact3" role="tab"
-                                                aria-selected="false">Contact</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-9 col-sm-12">
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="home3" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="profile3" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="contact3" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                    <div class="pd-20 card-box">
-                        <h5 class="h4 text-blue mb-20">Custom vertical Tab</h5>
-                        <div class="tab">
-                            <div class="row clearfix">
-                                <div class="col-md-3 col-sm-12">
-                                    <ul class="nav flex-column vtabs nav-tabs customtab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home4" role="tab"
-                                                aria-selected="true">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile4" role="tab"
-                                                aria-selected="false">Profile</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#contact4" role="tab"
-                                                aria-selected="false">Contact</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-9 col-sm-12">
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="home4" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="profile4" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="contact4" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                    <div class="pd-20 card-box">
-                        <h5 class="h4 text-blue mb-20">Nav Pills Tabs</h5>
-                        <div class="tab">
-                            <ul class="nav nav-pills" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active text-blue" data-toggle="tab" href="#home5" role="tab"
-                                        aria-selected="true">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-blue" data-toggle="tab" href="#profile5" role="tab"
-                                        aria-selected="false">Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-blue" data-toggle="tab" href="#contact5" role="tab"
-                                        aria-selected="false">Contact</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="home5" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile5" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="contact5" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                    <div class="pd-20 card-box">
-                        <h5 class="h4 text-blue mb-20">Nav Pills Tabs Right</h5>
-                        <div class="tab">
-                            <ul class="nav nav-pills justify-content-end" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active text-blue" data-toggle="tab" href="#home6" role="tab"
-                                        aria-selected="true">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-blue" data-toggle="tab" href="#profile6" role="tab"
-                                        aria-selected="false">Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-blue" data-toggle="tab" href="#contact6" role="tab"
-                                        aria-selected="false">Contact</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="home6" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile6" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="contact6" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                    <div class="pd-20 card-box">
-                        <h5 class="h4 text-blue mb-20">Icons vertical Nav Pills Tab</h5>
-                        <div class="tab">
-                            <div class="row clearfix">
-                                <div class="col-md-3 col-sm-12">
-                                    <ul class="nav flex-column nav-pills vtabs" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"
-                                                aria-selected="true"><i class="fa fa-home"></i></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"
-                                                aria-selected="false"><i class="fa fa-users"></i></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#contact7" role="tab"
-                                                aria-selected="false"><i class="fa fa-envelope-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-9 col-sm-12">
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="home7" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="profile7" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="contact7" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                    <div class="pd-20 card-box">
-                        <h5 class="h4 text-blue mb-20">Icons vertical Tab</h5>
-                        <div class="tab">
-                            <div class="row clearfix">
-                                <div class="col-md-3 col-sm-12">
-                                    <ul class="nav flex-column nav-tabs vtabs" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home8" role="tab"
-                                                aria-selected="true"><i class="fa fa-home"></i></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile8" role="tab"
-                                                aria-selected="false"><i class="fa fa-users"></i></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#contact8" role="tab"
-                                                aria-selected="false"><i class="fa fa-envelope-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-9 col-sm-12">
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="home8" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="profile8" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="contact8" role="tabpanel">
-                                            <div class="pd-20">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-wrap pd-20 mb-20 card-box">
-            Wolfcore Technologies<a href="https://wolfcoretechnologies.com" target="_blank">Wolfcore</a>
-        </div>
-    </div>
+	<link rel="stylesheet" type="text/css"href="{{ asset('vendors/styles/style.css') }}">
 
-@endsection
+	<div class="pre-loader">
+		<div class="pre-loader-box">
+			<div class="loader-logo"><img src="vendors/images/deskapp-logo.svg" alt=""></div>
+			<div class='loader-progress' id="progress_div">
+				<div class='bar' id='bar1'></div>
+			</div>
+			<div class='percent' id='percent1'>0%</div>
+			<div class="loading-text">
+				Loading...
+			</div>
+		</div>
+	</div>
+
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+			<div class="header-search">
+				<form>
+					<div class="form-group mb-0">
+						<i class="dw dw-search2 search-icon"></i>
+						<input type="text" class="form-control search-input" placeholder="Search Here">
+						<div class="dropdown">
+							<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+								<i class="ion-arrow-down-c"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">From</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">To</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="text-right">
+									<button class="btn btn-primary">Search</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="header-right">
+			<div class="dashboard-setting user-notification">
+				<div class="dropdown">
+					<a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+						<i class="dw dw-settings2"></i>
+					</a>
+				</div>
+			</div>
+			<div class="user-notification">
+				<div class="dropdown">
+					<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+						<i class="icon-copy dw dw-notification"></i>
+						<span class="badge notification-active"></span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<div class="notification-list mx-h-350 customscroll">
+							<ul>
+								<li>
+									<a href="#">
+										<img src="vendors/images/img.jpg" alt="">
+										<h3>John Doe</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="vendors/images/photo1.jpg" alt="">
+										<h3>Lea R. Frith</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="vendors/images/photo2.jpg" alt="">
+										<h3>Erik L. Richards</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="vendors/images/photo3.jpg" alt="">
+										<h3>John Doe</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="vendors/images/photo4.jpg" alt="">
+										<h3>Renee I. Hansen</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="vendors/images/img.jpg" alt="">
+										<h3>Vicki M. Coleman</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img src="vendors/images/photo1.jpg" alt="">
+						</span>
+						<span class="user-name">Ross C. Lopez</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
+						<a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
+						<a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
+						<a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
+					</div>
+				</div>
+			</div>
+			<div class="github-link">
+				<a href="https://github.com/dropways/deskapp" target="_blank"><img src="vendors/images/github.svg" alt=""></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="right-sidebar">
+		<div class="sidebar-title">
+			<h3 class="weight-600 font-16 text-blue">
+				Layout Settings
+				<span class="btn-block font-weight-400 font-12">User Interface Settings</span>
+			</h3>
+			<div class="close-sidebar" data-toggle="right-sidebar-close">
+				<i class="icon-copy ion-close-round"></i>
+			</div>
+		</div>
+		<div class="right-sidebar-body customscroll">
+			<div class="right-sidebar-body-content">
+				<h4 class="weight-600 font-18 pb-10">Header Background</h4>
+				<div class="sidebar-btn-group pb-30 mb-10">
+					<a href="javascript:void(0);" class="btn btn-outline-primary header-white active">White</a>
+					<a href="javascript:void(0);" class="btn btn-outline-primary header-dark">Dark</a>
+				</div>
+
+				<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+				<div class="sidebar-btn-group pb-30 mb-10">
+					<a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
+					<a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark active">Dark</a>
+				</div>
+
+				<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+				<div class="sidebar-radio-group pb-10 mb-10">
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-1" checked="">
+						<label class="custom-control-label" for="sidebaricon-1"><i class="fa fa-angle-down"></i></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-2">
+						<label class="custom-control-label" for="sidebaricon-2"><i class="ion-plus-round"></i></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-3">
+						<label class="custom-control-label" for="sidebaricon-3"><i class="fa fa-angle-double-right"></i></label>
+					</div>
+				</div>
+
+				<h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+				<div class="sidebar-radio-group pb-30 mb-10">
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input" value="icon-list-style-1" checked="">
+						<label class="custom-control-label" for="sidebariconlist-1"><i class="ion-minus-round"></i></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input" value="icon-list-style-2">
+						<label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o" aria-hidden="true"></i></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input" value="icon-list-style-3">
+						<label class="custom-control-label" for="sidebariconlist-3"><i class="dw dw-check"></i></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input" value="icon-list-style-4" checked="">
+						<label class="custom-control-label" for="sidebariconlist-4"><i class="icon-copy dw dw-next-2"></i></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input" value="icon-list-style-5">
+						<label class="custom-control-label" for="sidebariconlist-5"><i class="dw dw-fast-forward-1"></i></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input" value="icon-list-style-6">
+						<label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
+					</div>
+				</div>
+
+				<div class="reset-options pt-30 text-center">
+					<button class="btn btn-danger" id="reset-settings">Reset Settings</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="mobile-menu-overlay"></div>
+
+	<div class="main-container">
+		<div class="xs-pd-20-10 pd-ltr-20">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Dashboard</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-md-6 col-sm-12 text-right">
+						<div class="dropdown">
+							<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+								January 2018
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="#">Export List</a>
+								<a class="dropdown-item" href="#">Policies</a>
+								<a class="dropdown-item" href="#">View Assets</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row clearfix progress-box">
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+					<div class="card-box pd-30 height-100-p">
+						<div class="progress-box text-center">
+							 <input type="text" class="knob dial1" value="80" data-width="120" data-height="120" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#1b00ff" data-angleOffset="180" readonly>
+							<h5 class="text-blue padding-top-10 h5">My Earnings</h5>
+							<span class="d-block">80% Average <i class="fa fa-line-chart text-blue"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+					<div class="card-box pd-30 height-100-p">
+						<div class="progress-box text-center">
+							 <input type="text" class="knob dial2" value="70" data-width="120" data-height="120" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#00e091" data-angleOffset="180" readonly>
+							<h5 class="text-light-green padding-top-10 h5">Business Captured</h5>
+							<span class="d-block">75% Average <i class="fa text-light-green fa-line-chart"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+					<div class="card-box pd-30 height-100-p">
+						<div class="progress-box text-center">
+							 <input type="text" class="knob dial3" value="90" data-width="120" data-height="120" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#f56767" data-angleOffset="180" readonly>
+							<h5 class="text-light-orange padding-top-10 h5">Projects Speed</h5>
+							<span class="d-block">90% Average <i class="fa text-light-orange fa-line-chart"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+					<div class="card-box pd-30 height-100-p">
+						<div class="progress-box text-center">
+							 <input type="text" class="knob dial4" value="65" data-width="120" data-height="120" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#a683eb" data-angleOffset="180" readonly>
+							<h5 class="text-light-purple padding-top-10 h5">Panding Orders</h5>
+							<span class="d-block">65% Average <i class="fa text-light-purple fa-line-chart"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-30">
+					<div class="card-box pd-30 pt-10 height-100-p">
+						<h2 class="mb-30 h4">Browser Visit</h2>
+						<div class="browser-visits">
+							<ul>
+								<li class="d-flex flex-wrap align-items-center">
+									<div class="icon"><img src="vendors/images/chrome.png" alt=""></div>
+									<div class="browser-name">Google Chrome</div>
+									<div class="visit"><span class="badge badge-pill badge-primary">50%</span></div>
+								</li>
+								<li class="d-flex flex-wrap align-items-center">
+									<div class="icon"><img src="vendors/images/firefox.png" alt=""></div>
+									<div class="browser-name">Mozilla Firefox</div>
+									<div class="visit"><span class="badge badge-pill badge-secondary">40%</span></div>
+								</li>
+								<li class="d-flex flex-wrap align-items-center">
+									<div class="icon"><img src="vendors/images/safari.png" alt=""></div>
+									<div class="browser-name">Safari</div>
+									<div class="visit"><span class="badge badge-pill badge-success">40%</span></div>
+								</li>
+								<li class="d-flex flex-wrap align-items-center">
+									<div class="icon"><img src="vendors/images/edge.png" alt=""></div>
+									<div class="browser-name">Microsoft Edge</div>
+									<div class="visit"><span class="badge badge-pill badge-warning">20%</span></div>
+								</li>
+								<li class="d-flex flex-wrap align-items-center">
+									<div class="icon"><img src="vendors/images/opera.png" alt=""></div>
+									<div class="browser-name">Opera Mini</div>
+									<div class="visit"><span class="badge badge-pill badge-info">20%</span></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-6 col-sm-12 mb-30">
+					<div class="card-box pd-30 pt-10 height-100-p">
+						<h2 class="mb-30 h4">World Map</h2>
+						<div id="browservisit" style="width:100%!important; height:380px"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-7 col-md-12 col-sm-12 mb-30">
+					<div class="card-box pd-30 height-100-p">
+						<h4 class="mb-30 h4">Compliance Trend</h4>
+						<div id="compliance-trend" class="compliance-trend"></div>
+					</div>
+				</div>
+				<div class="col-lg-5 col-md-12 col-sm-12 mb-30">
+					<div class="card-box pd-30 height-100-p">
+						<h4 class="mb-30 h4">Records</h4>
+						<div id="chart" class="chart"></div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-wrap pd-20 mb-20 card-box">
+				DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
+			</div>
+		</div>
+	</div>
+	<!-- js -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="{{ asset('vendors/scripts/core.js') }}"></script>
+	
+	<script src="{{ asset('vendors/scripts/process.js') }}"></script>
+	<script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
+	<script src="{{asset('src/plugins/jQuery-Knob-master/jquery.knob.min.js') }}"></script>
+	<script src="{{asset('src/plugins/highcharts-6.0.7/code/highcharts.js') }}"></script>
+	<script src="{{asset('src/plugins/highcharts-6.0.7/code/highcharts-more.js') }}"></script>
+	<script src="{{asset('src/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js') }}"></script>
+	<script src="{{asset('src/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+	<script src="{{asset('vendors/scripts/dashboard2.js') }}"></script>
+   
+
+</body>
+</html>

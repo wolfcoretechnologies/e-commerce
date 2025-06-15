@@ -14,7 +14,7 @@
                 </div>
             </div>
             <!--End Breadcrumb-->
-
+    {{$product}}
             <div id="ProductSection-product-template" class="product-template__container prstyle2 container">
                 <!--#ProductSection-product-template-->
                 <div class="product-single product-single-1">
@@ -24,8 +24,8 @@
                                 <div class="zoompro-wrap product-zoom-right pl-20">
                                     <div class="zoompro-span">
                                         <img class="blur-up lazyload zoompro"
-                                            data-zoom-image="{{ asset('assets/images/home-images/hm-1.jpg') }}" alt=""
-                                            src="{{ asset('assets/images/home-images/hm-1.jpg') }}" />
+                                            data-zoom-image="{{asset('storage/'.$product->image)}}" alt=""
+                                             src="{{asset('storage/'.$product->image)}}" />
                                     </div>
                                     <div class="product-labels"><span class="lbl on-sale">Sale</span><span
                                             class="lbl pr-label1">new</span></div>
@@ -42,7 +42,7 @@
                                             data-zoom-image="assets/images/home-images/hm-1.jpg"
                                             class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true"
                                             tabindex="-1">
-                                            <img class="blur-up lazyload" src="{{ asset('assets/images/home-images/hm-1.jpg') }}" alt="" />
+                                            <img class="blur-up lazyload" src="{{asset('storage/'.$product->image)}}" alt="" />
                                         </a>
                                         <a data-image="assets/images/home-images/hm-2.jpg"
                                             data-zoom-image="assets/images/home-images/hm-2.jpg"
@@ -667,12 +667,12 @@
                                     <!-- start product image -->
                                     <a href="short-description.html">
                                         <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="assets/images/home-images/hm-1.jpg"
-                                            src="assets/images/home-images/hm-1.jpg" alt="image" title="product">
+                                        <img class="primary blur-up lazyload" data-src="{{asset('storage/'.$product->image)}}"
+                                            src="{{asset('storage/'.$product->image)}}" alt="image" title="product">
                                         <!-- End image -->
                                         <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="assets/images/home-images/hm-1.jpg"
-                                            src="assets/images/home-images/hm-1.jpg" alt="image" title="product">
+                                        <img class="hover blur-up lazyload" data-src="{{asset('storage/'.$product->image)}}"
+                                            src="{{asset('storage/'.$product->image)}}" alt="image" title="product">
                                         <!-- End hover image -->
                                         <!-- product label -->
                                         <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span
@@ -732,15 +732,15 @@
                                     </div>
                                     <!-- Variant -->
                                     <ul class="swatches">
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
 
                                     </ul>
@@ -1162,12 +1162,12 @@
                                     <!-- start product image -->
                                     <a href="short-description.html">
                                         <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="assets/images/home-images/hm-1.jpg"
-                                            src="assets/images/home-images/hm-1.jpg" alt="image" title="product">
+                                        <img class="primary blur-up lazyload" data-src="{{asset('storage/'.$product->image)}}"
+                                            src="{{asset('storage/'.$product->image)}}" alt="image" title="product">
                                         <!-- End image -->
                                         <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="assets/images/home-images/hm-1.jpg"
-                                            src="assets/images/home-images/hm-1.jpg" alt="image" title="product">
+                                        <img class="hover blur-up lazyload" data-src="{{asset('storage/'.$product->image)}}"
+                                            src="{{asset('storage/'.$product->image)}}" alt="image" title="product">
                                         <!-- End hover image -->
                                         <!-- product label -->
                                         <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span
@@ -1227,15 +1227,15 @@
                                     </div>
                                     <!-- Variant -->
                                     <ul class="swatches">
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="assets/images/home-images/hm-1.jpg"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
 
                                     </ul>

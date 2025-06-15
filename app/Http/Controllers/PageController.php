@@ -8,9 +8,11 @@ use App\Models\Products;
 class PageController extends Controller
 {
     //
-    public function main()
+   public function main()
     {
-        return view("main");
+        $data=Products::all();
+       
+        return view("main", compact('data'));
     }
 
 
