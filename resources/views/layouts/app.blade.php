@@ -10,14 +10,14 @@
     <meta name="description" content="description">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="assets/css/plugins.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins.css') }}">
     <!-- Bootstap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 </head>
 
 <body class="template-index belle template-index-belle">
@@ -242,16 +242,16 @@
         <!-- End Newsletter Popup -->
 
         <!-- Including Jquery -->
-        <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
-        <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-        <script src="assets/js/vendor/jquery.cookie.js"></script>
-        <script src="assets/js/vendor/wow.min.js"></script>
+        <script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor/jquery.cookie.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor/wow.min.js') }}"></script>
         <!-- Including Javascript -->
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/plugins.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/lazysizes.js"></script>
-        <script src="assets/js/main.js"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/js/plugins.js') }}"></script>
+        <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/js/lazysizes.js') }}"></script>
+        <script src="{{ asset('assets/js/main.js')  }}"></script>
     </div>
 </body>
 

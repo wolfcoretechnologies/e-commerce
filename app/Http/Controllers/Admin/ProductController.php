@@ -62,27 +62,53 @@ class ProductController extends Controller
             }
         }
 
-        foreach ($request->colors as $colorData) {
-            $color = $product->colors()->create([
-                'color_name' => $colorData['name'],
-                'color_image' => $colorData['image'],
+        $groupId = $product->id;
+
+        foreach ($request->colors as $index => $colorData) {
+            $colorProduct = Products::create([
+                'name' => $request->name . ' - ' . $colorData['name'],
+                'slug' => Str::slug($request->name . '-' . $colorData['name']),
+                'small_description' => $request->small_description,
+                'price' => $request->price,
+                'discount_price' => $request->discount_price ?? 0,
+                'description' => $request->description,
+                'size_category' => $request->size_category,
+                'color_category' => $colorData['name'],
+                'variation_category' => $request->variation_category,
+                'stock' => $request->stock,
+                'image' => $colorData['image'],
+                'parent_id' => $groupId
             ]);
 
-            foreach ($colorData['sizes'] ?? [] as $sizeData) {
-                // Ensure both 'size' and 'stock' exist
-                if (!array_key_exists('size', $sizeData) || !array_key_exists('stock', $sizeData)) {
-                    // Optional: Log or debug malformed input
-                    \Log::warning('Invalid sizeData entry:', $sizeData);
-                    continue;
-                }
+            if ($index == 0) {
+                $groupId = $colorProduct->id;
+                $colorProduct->parent_id = null;
+                $colorProduct->save();
+            } else {
+                $colorProduct->parent_id = $groupId;
+                $colorProduct->save();
+            }
 
-                // Create size entry
-                $color->sizes()->create([
+            // Add additional images (optional)
+            if (!empty($colorData['images'])) {
+                foreach ($colorData['images'] as $imagePath) {
+                    ProductImages::create([
+                        'product_id' => $colorProduct->id,
+                        'image' => $imagePath
+                    ]);
+                }
+            }
+
+            // Add sizes
+            foreach ($colorData['sizes'] ?? [] as $sizeData) {
+                if (!isset($sizeData['size'], $sizeData['stock']))
+                    continue;
+
+                $colorProduct->sizes()->create([
                     'size' => $sizeData['size'],
                     'stock' => $sizeData['stock'],
                 ]);
             }
-
         }
 
         return redirect()->back()->with('success', 'Product added successfully!');

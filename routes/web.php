@@ -45,3 +45,5 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
 Route::get('/', [PageController::class, 'main']);
 Route::get('/shop', [PageController::class, 'shop'])->name('shop');
+Route::get('/product/{id}', [PageController::class, 'productDetail'])->name('product.detail');
+
