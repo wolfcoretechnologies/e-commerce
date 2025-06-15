@@ -126,8 +126,9 @@
                     <div id="color-container">
                         <!-- JavaScript will add color sections here -->
                     </div>
-
-                    <button type="button" onclick="addColor()">+ Add Color</button>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-primary" onclick="addColor()">+ Add Color</button>
+                    </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Add Product</button>
                     </div>
@@ -152,7 +153,9 @@
             <div class="size-container">
                 <!-- Size rows will go here -->
             </div>
-            <button type="button" onclick="addSize(this)">+ Add Size</button>
+            <div class="mb-3">
+                <button type="button" class="btn btn-primary" onclick="addSize(this)">+ Add Size</button>
+            </div>
             <hr>
         </div>
     </template>
