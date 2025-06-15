@@ -75,7 +75,7 @@
                             style="max-height: 400px;">
                     </div>
 
-                    <input type="hidden" name="image" id="imageInput"> <!-- will be filled manually -->
+                    <input type="hidden" name="image" id="bannerImage"> <!-- will be filled manually -->
                     <div class="mb-30">
                         <h4 class="h4 text-blue">Active status</h4>
                         <input type="checkbox" name="status" value="active" {{ old('status', 'active') === 'active' ? 'checked' : '' }} class="switch-btn" data-color="#41ccba">
@@ -101,6 +101,8 @@
             const dropzone = new Dropzone("#dropzone-area", {
                 url: "/admin/upload-temp-image",
                 autoProcessQueue: true,
+                method: 'POST',
+                params: { folder: 'banners' },
                 maxFiles: 1,
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
@@ -111,7 +113,8 @@
                 },
 
                 success: function (file, response) {
-                    document.getElementById('imageInput').value = response.path;
+                    console.log(response)
+                    document.getElementById('bannerImage').value = response.paths;
                 },
 
                 error: function (file, response) {

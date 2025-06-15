@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function show(){
+    public function show()
+    {
         $banners = Banner::where('status', 'active')->get();
-        return view('admin.banner',compact('banners'));
+        return view('admin.banner', compact('banners'));
     }
     public function store(Request $request)
     {
@@ -19,7 +20,7 @@ class AdminController extends Controller
             // Validate inputs
             $request->validate([
                 'title' => 'required|string|max:255',
-                'image'   => 'required|string',
+                'image' => 'required|string',
                 'content' => 'nullable|string',
             ]);
 
@@ -45,13 +46,32 @@ class AdminController extends Controller
     public function uploadTempImage(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'file' => 'required',
+            'file.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
+            'folder' => 'nullable|string'
         ]);
 
-        $path = $request->file('file')->store('banners', 'public');
+        $folder = $request->input('folder', 'uploads');
 
-        return response()->json(['path' => $path]);
+        $files = $request->file('file');
+
+        $paths = [];
+
+        if (is_array($files)) {
+            // Multiple images
+            foreach ($files as $file) {
+                $paths[] = $file->store($folder, 'public');
+            }
+        } else {
+            // Single image
+            $paths[] = $files->store($folder, 'public');
+        }
+
+        return response()->json(['paths' => $paths]);
     }
+
+
+
 
 
 }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\ProductController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -18,6 +19,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/upload-temp-image', [AdminController::class, 'uploadTempImage']);
 
     Route::match(['get', 'post'], '/admin/banner/addbanner', [AdminController::class, 'store'])->name('admin.addbanner');
+
+    //Products
+    Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');
+
 });
 
 Route::middleware(['auth', 'role:shop'])->group(function () {
