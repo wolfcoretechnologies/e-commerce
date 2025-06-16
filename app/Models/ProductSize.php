@@ -9,5 +9,5 @@ class ProductSize extends Model
     //
 
     protected $table = "product_sizes";
-    protected $fillable = ["product_color_id","size","stock"];
+    protected $fillable = ["product_id","size","stock"];
 }

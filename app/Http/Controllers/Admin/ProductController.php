@@ -63,8 +63,9 @@ class ProductController extends Controller
         // Now create individual color products
         $groupId = null;
 
+
         foreach ($request->colors as $index => $colorData) {
-            $colorProduct = Products::create([
+            $productData = [
                 'name' => $request->name . ' - ' . $colorData['name'],
                 'slug' => Str::slug($request->name . '-' . $colorData['name']),
                 'small_description' => $request->small_description,
@@ -76,24 +77,26 @@ class ProductController extends Controller
                 'variation_category' => $request->variation_category,
                 'stock' => $request->stock,
                 'image' => $colorData['image'],
-                'parent_id' => null, // set properly below
-            ]);
+                'parent_id' => $groupId, // first one will be NULL
+            ];
+
+            $colorProduct = Products::create($productData);
 
             if ($index == 0) {
-                $groupId = $colorProduct->id; // First product becomes the parent
-            } else {
+                // first variant becomes the group leader
+                $groupId = $mainProduct->id;
+
+                // Update its parent_id
                 $colorProduct->parent_id = $groupId;
                 $colorProduct->save();
             }
 
-            // Additional images
-            if (!empty($colorData['images'])) {
-                foreach ($colorData['images'] as $img) {
-                    ProductImages::create([
-                        'product_id' => $colorProduct->id,
-                        'image' => $img
-                    ]);
-                }
+            // Images
+            foreach ($colorData['images'] ?? [] as $img) {
+                ProductImages::create([
+                    'product_id' => $colorProduct->id,
+                    'image' => $img
+                ]);
             }
 
             // Sizes
@@ -106,6 +109,7 @@ class ProductController extends Controller
                 }
             }
         }
+
 
         return redirect()->back()->with('success', 'Product added successfully!');
     }

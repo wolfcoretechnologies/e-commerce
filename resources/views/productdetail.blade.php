@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Product detail')
+@section('title', $product->name)
 
 @section('content')
     <div id="page-content">
@@ -9,12 +9,12 @@
             <!--Breadcrumb-->
             <div class="bredcrumbWrap">
                 <div class="container breadcrumbs">
-                    <a href="index.html" title="Back to the home page">Home</a><span
-                        aria-hidden="true">›</span><span>Product Accordion</span>
+                    <a href="{{ route('home') }}" title="Back to the home page">Home</a><span
+                        aria-hidden="true">›</span><span> {{$product->name}}</span>
                 </div>
             </div>
             <!--End Breadcrumb-->
-    {{$product}}
+
             <div id="ProductSection-product-template" class="product-template__container prstyle2 container">
                 <!--#ProductSection-product-template-->
                 <div class="product-single product-single-1">
@@ -24,8 +24,8 @@
                                 <div class="zoompro-wrap product-zoom-right pl-20">
                                     <div class="zoompro-span">
                                         <img class="blur-up lazyload zoompro"
-                                            data-zoom-image="{{asset('storage/'.$product->image)}}" alt=""
-                                             src="{{asset('storage/'.$product->image)}}" />
+                                            data-zoom-image="{{asset('storage/' . $product->image)}}" alt=""
+                                            src="{{asset('storage/' . $product->image)}}" />
                                     </div>
                                     <div class="product-labels"><span class="lbl on-sale">Sale</span><span
                                             class="lbl pr-label1">new</span></div>
@@ -38,68 +38,30 @@
                                 </div>
                                 <div class="product-thumb product-thumb-1">
                                     <div id="gallery" class="product-dec-slider-1 product-tab-left">
-                                        <a data-image="{{ asset('assets/images/home-images/hm-1.jpg') }}"
-                                            data-zoom-image="assets/images/home-images/hm-1.jpg"
+                                        <a data-image="{{asset('storage/' . $product->image)}}"
+                                            data-zoom-image="{{asset('storage/' . $product->image)}}"
                                             class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true"
                                             tabindex="-1">
-                                            <img class="blur-up lazyload" src="{{asset('storage/'.$product->image)}}" alt="" />
+                                            <img class="blur-up lazyload" src="{{asset('storage/' . $product->image)}}"
+                                                alt="" />
                                         </a>
-                                        <a data-image="assets/images/home-images/hm-2.jpg"
-                                            data-zoom-image="assets/images/home-images/hm-2.jpg"
-                                            class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true"
-                                            tabindex="-1">
-                                            <img class="blur-up lazyload" src="assets/images/home-images/hm-2.jpg" alt="" />
-                                        </a>
-                                        <a data-image="assets/images/home-images/hm-3.jpg"
-                                            data-zoom-image="assets/images/home-images/hm-3.jpg"
-                                            class="slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true"
-                                            tabindex="-1">
-                                            <img class="blur-up lazyload" src="assets/images/home-images/hm-3.jpg" alt="" />
-                                        </a>
-                                        <a data-image="assets/images/home-images/hm-4.jpg"
-                                            data-zoom-image="assets/images/home-images/hm-4.jpg"
-                                            class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true"
-                                            tabindex="-1">
-                                            <img class="blur-up lazyload" src="assets/images/home-images/hm-4.jpg" alt="" />
-                                        </a>
-                                        <a data-image="assets/images/home-images/hm-5.jpg"
-                                            data-zoom-image="assets/images/home-images/hm-5.jpg"
-                                            class="slick-slide slick-cloned" data-slick-index="0" aria-hidden="true"
-                                            tabindex="-1">
-                                            <img class="blur-up lazyload" src="assets/images/home-images/hm-5.jpg" alt="" />
-                                        </a>
-                                        <a data-image="assets/images/home-images/hm-6.jpg"
-                                            data-zoom-image="assets/images/home-images/hm-6.jpg"
-                                            class="slick-slide slick-cloned" data-slick-index="1" aria-hidden="true"
-                                            tabindex="-1">
-                                            <img class="blur-up lazyload" src="assets/images/home-images/hm-6.jpg" alt="" />
-                                        </a>
-                                        <a data-image="assets/images/home-images/hm-7.jpg"
-                                            data-zoom-image="assets/images/home-images/hm-7.jpg"
-                                            class="slick-slide slick-cloned" data-slick-index="2" aria-hidden="true"
-                                            tabindex="-1">
-                                            <img class="blur-up lazyload" src="assets/images/home-images/hm-7.jpg" alt="" />
-                                        </a>
-                                        <a data-image="assets/images/home-images/hm-8.jpg"
-                                            data-zoom-image="assets/images/home-images/hm-8.jpg"
-                                            class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true"
-                                            tabindex="-1">
-                                            <img class="blur-up lazyload" src="assets/images/home-images/hm-8.jpg" alt="" />
-                                        </a>
+                                        @foreach($productImages as $productImage)
+                                            <a data-image="{{asset('storage/' . $productImage->image)}}"
+                                                data-zoom-image="{{asset('storage/' . $productImage->image)}}"
+                                                class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true"
+                                                tabindex="-1">
+                                                <img class="blur-up lazyload" src="{{asset('storage/' . $productImage->image)}}"
+                                                    alt="" />
+                                            </a>
+                                        @endforeach
+
                                     </div>
                                 </div>
                                 <div class="lightboximages">
-                                    <a href="assets/images/home-images/hm-39.jpg" data-size="1462x2048"></a>
-                                    <a href="assets/images/home-images/hm-38.jpg" data-size="1462x2048"></a>
-                                    <a href="assets/images/home-images/hm-37.jpg" data-size="1462x2048"></a>
-                                    <a href="assets/images/home-images/hm-36.jpg" data-size="1462x2048"></a>
-                                    <a href="assets/images/home-images/hm-35.jpg" data-size="1462x2048"></a>
-                                    <a href="assets/images/home-images/hm-34.jpg" data-size="1462x2048"></a>
-                                    <a href="assets/images/home-images/hm-33.jpg" data-size="731x1024"></a>
-                                    <a href="assets/images/home-images/hm-32.jpg" data-size="731x1024"></a>
-                                    <a href="assets/images/home-images/hm-31.jpg" data-size="731x1024"></a>
-                                    <a href="assets/images/home-images/hm-30.jpg" data-size="731x1024"></a>
-                                    <a href="assets/images/home-images/hm-29.jpg" data-size="731x1024"></a>
+                                    <a href="{{asset('storage/' . $product->image)}}" data-size="1462x2048"></a>
+                                    @foreach($productImages as $productImage)
+                                        <a href="{{asset('storage/' . $productImage->image)}}" data-size="1462x2048"></a>
+                                    @endforeach
                                 </div>
 
                             </div>
@@ -139,7 +101,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="product-single__meta">
-                                <h1 class="product-single__title">Product Accordion</h1>
+                                <h1 class="product-single__title">{{$product->name}}</h1>
                                 <div class="product-nav clearfix">
                                     <a href="#" class="next" title="Next"><i class="fa fa-angle-right"
                                             aria-hidden="true"></i></a>
@@ -156,10 +118,10 @@
                                 </div>
                                 <p class="product-single__price product-single__price-product-template">
                                     <span class="visually-hidden">Regular price</span>
-                                    <s id="ComparePrice-product-template"><span class="money">$900.00</span></s>
+                                    <s id="ComparePrice-product-template"><span class="money">{{$product->price}}</span></s>
                                     <span
                                         class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
-                                        <span id="ProductPrice-product-template"><span class="money">$788.00</span></span>
+                                        <span id="ProductPrice-product-template"><span class="money">${{$product->discount_price}}</span></span>
                                     </span>
                                     <span class="discount-badge"> <span class="devider">|</span>&nbsp;
                                         <span>You Save</span>
@@ -170,39 +132,22 @@
                                     </span>
                                 </p>
                                 <div class="product-single__description rte">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                        Lorem Ipsum has been the industry's standard dummy text ever since the
-                                        1500s, when an unknown printer took a galley of type and scrambled it to
-                                        make a type specimen book.</p>
+                                    <p>{{$product->small_description}}</p>
                                 </div>
                                 <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282"
                                     accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown"
                                     enctype="multipart/form-data">
                                     <div class="swatch clearfix swatch-0 option1" data-option-index="0">
                                         <div class="product-form__item">
-                                            <label class="header">Color: <span class="slVariant">Red</span></label>
-                                            <div data-value="Black" class="swatch-element color black available">
+                                            <label class="header">Color:</label>
+                                            @foreach($colorProducts as $colorProduct)
+                                            <div data-value="{{ $colorProduct->color_category }}" class="swatch-element color black available">
                                                 <input class="swatchInput" id="swatch-0-black" type="radio" name="option-0"
-                                                    value="Black"><label class="swatchLbl color small" for="swatch-0-black"
-                                                    style="background-color:black;" title="Black"></label>
+                                                    value="{{ $colorProduct->color_category }}">
+                                                    <a href="/product/{{ $colorProduct->id }}  "><img height="50px" width="50" src="{{asset('storage/' . $colorProduct->image)}}" alt="{{ $colorProduct->color_category }}"></a>
                                             </div>
-                                            <div data-value="Maroon" class="swatch-element color maroon available">
-                                                <input class="swatchInput" id="swatch-0-maroon" type="radio" name="option-0"
-                                                    value="Maroon"><label class="swatchLbl color small"
-                                                    for="swatch-0-maroon" style="background-color:maroon;"
-                                                    title="Maroon"></label>
-                                            </div>
-                                            <div data-value="Blue" class="swatch-element color blue available">
-                                                <input class="swatchInput" id="swatch-0-blue" type="radio" name="option-0"
-                                                    value="Blue"><label class="swatchLbl color small" for="swatch-0-blue"
-                                                    style="background-color:blue;" title="Blue"></label>
-                                            </div>
-                                            <div data-value="Dark Green" class="swatch-element color dark-green available">
-                                                <input class="swatchInput" id="swatch-0-dark-green" type="radio"
-                                                    name="option-0" value="Dark Green"><label class="swatchLbl color small"
-                                                    for="swatch-0-dark-green" style="background-color:darkgreen;"
-                                                    title="Dark Green"></label>
-                                            </div>
+                                            @endforeach
+
                                         </div>
                                     </div>
                                     <div class="swatch clearfix swatch-1 option2" data-option-index="1">
@@ -225,9 +170,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a>
-                                        <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a>
-                                    </p>
+
                                     <!-- Product Action -->
                                     <div class="product-action clearfix">
                                         <div class="product-form__item--quantity">
@@ -667,12 +610,14 @@
                                     <!-- start product image -->
                                     <a href="short-description.html">
                                         <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="{{asset('storage/'.$product->image)}}"
-                                            src="{{asset('storage/'.$product->image)}}" alt="image" title="product">
+                                        <img class="primary blur-up lazyload"
+                                            data-src="{{asset('storage/' . $product->image)}}"
+                                            src="{{asset('storage/' . $product->image)}}" alt="image" title="product">
                                         <!-- End image -->
                                         <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="{{asset('storage/'.$product->image)}}"
-                                            src="{{asset('storage/'.$product->image)}}" alt="image" title="product">
+                                        <img class="hover blur-up lazyload"
+                                            data-src="{{asset('storage/' . $product->image)}}"
+                                            src="{{asset('storage/' . $product->image)}}" alt="image" title="product">
                                         <!-- End hover image -->
                                         <!-- product label -->
                                         <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span
@@ -732,15 +677,15 @@
                                     </div>
                                     <!-- Variant -->
                                     <ul class="swatches">
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
 
                                     </ul>
@@ -1162,12 +1107,14 @@
                                     <!-- start product image -->
                                     <a href="short-description.html">
                                         <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="{{asset('storage/'.$product->image)}}"
-                                            src="{{asset('storage/'.$product->image)}}" alt="image" title="product">
+                                        <img class="primary blur-up lazyload"
+                                            data-src="{{asset('storage/' . $product->image)}}"
+                                            src="{{asset('storage/' . $product->image)}}" alt="image" title="product">
                                         <!-- End image -->
                                         <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="{{asset('storage/'.$product->image)}}"
-                                            src="{{asset('storage/'.$product->image)}}" alt="image" title="product">
+                                        <img class="hover blur-up lazyload"
+                                            data-src="{{asset('storage/' . $product->image)}}"
+                                            src="{{asset('storage/' . $product->image)}}" alt="image" title="product">
                                         <!-- End hover image -->
                                         <!-- product label -->
                                         <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span
@@ -1227,15 +1174,15 @@
                                     </div>
                                     <!-- Variant -->
                                     <ul class="swatches">
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/'.$product->image)}}"
+                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
                                                 alt="image" width="50" height="50" /></li>
 
                                     </ul>

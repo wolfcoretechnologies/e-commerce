@@ -43,7 +43,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 //     return view('welcome');
 // });
 
-Route::get('/', [PageController::class, 'main']);
+Route::get('/', [PageController::class, 'main'])->name('home');
 Route::get('/shop', [PageController::class, 'shop'])->name('shop');
 Route::get('/product/{id}', [PageController::class, 'productDetail'])->name('product.detail');
 
