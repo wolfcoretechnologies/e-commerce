@@ -11,7 +11,7 @@ class Products extends Model
     //
     protected $table = 'products';
 
-    protected $fillable = ['name', 'image', 'slug', 'small_description', 'price', 'discount_price', 'description', 'size_category', 'color_category', 'variation_category', 'stock'];
+    protected $fillable = ['name','product_id', 'image', 'slug', 'small_description', 'price', 'discount_price', 'description', 'size_category', 'color_category', 'variation_category', 'stock', 'parent_id'];
     public function images()
     {
         return $this->hasMany(ProductImages::class);

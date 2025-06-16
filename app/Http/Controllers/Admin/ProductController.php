@@ -20,7 +20,6 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-
             'small_description' => 'required|string',
             'price' => 'required|numeric',
             'discount_price' => 'nullable|numeric',
@@ -29,40 +28,40 @@ class ProductController extends Controller
             'color_category' => 'nullable|string',
             'variation_category' => 'nullable|string',
             'stock' => 'required|integer',
-            'image' => 'required|string', // path from Dropzone (not file)
-            'uploaded_images' => 'nullable|string' // JSON encoded array from Dropzone
+            'image' => 'required|string',
+            'uploaded_images' => 'nullable|string',
+            'colors' => 'required|array',
         ]);
 
-        $slug = $request->slug ?? Str::slug($request->name);
+        // Optional: store a generic product (main listing) if you want
+        $mainProduct = null;
+        if (!empty($request->image)) {
+            $mainProduct = Products::create([
+                'name' => $request->name,
+                'slug' => $request->slug ?? Str::slug($request->name),
+                'small_description' => $request->small_description,
+                'price' => $request->price,
+                'discount_price' => $request->discount_price ?? 0,
+                'description' => $request->description,
+                'size_category' => $request->size_category,
+                'color_category' => $request->color_category,
+                'variation_category' => $request->variation_category,
+                'stock' => $request->stock,
+                'image' => $request->image
+            ]);
 
-        // Save product
-        $product = Products::create([
-            'name' => $request->name,
-            'slug' => $slug,
-            'small_description' => $request->small_description,
-            'price' => $request->price,
-            'discount_price' => $request->discount_price ?? 0,
-            'description' => $request->description,
-            'size_category' => $request->size_category,
-            'color_category' => $request->color_category,
-            'variation_category' => $request->variation_category,
-            'stock' => $request->stock,
-            'image' => $request->image // This is the stored path from Dropzone
-        ]);
-
-
-        if ($request->uploaded_images) {
-            $imagePaths = json_decode($request->uploaded_images, true);
-
-            foreach ($imagePaths as $path) {
-                ProductImages::create([
-                    'product_id' => $product->id,
-                    'image' => $path
-                ]);
+            if ($request->uploaded_images) {
+                foreach (json_decode($request->uploaded_images, true) as $img) {
+                    ProductImages::create([
+                        'product_id' => $mainProduct->id,
+                        'image' => $img
+                    ]);
+                }
             }
         }
 
-        $groupId = $product->id;
+        // Now create individual color products
+        $groupId = null;
 
         foreach ($request->colors as $index => $colorData) {
             $colorProduct = Products::create([
@@ -77,42 +76,40 @@ class ProductController extends Controller
                 'variation_category' => $request->variation_category,
                 'stock' => $request->stock,
                 'image' => $colorData['image'],
-                'parent_id' => $groupId
+                'parent_id' => null, // set properly below
             ]);
 
             if ($index == 0) {
-                $groupId = $colorProduct->id;
-                $colorProduct->parent_id = null;
-                $colorProduct->save();
+                $groupId = $colorProduct->id; // First product becomes the parent
             } else {
                 $colorProduct->parent_id = $groupId;
                 $colorProduct->save();
             }
 
-            // Add additional images (optional)
+            // Additional images
             if (!empty($colorData['images'])) {
-                foreach ($colorData['images'] as $imagePath) {
+                foreach ($colorData['images'] as $img) {
                     ProductImages::create([
                         'product_id' => $colorProduct->id,
-                        'image' => $imagePath
+                        'image' => $img
                     ]);
                 }
             }
 
-            // Add sizes
+            // Sizes
             foreach ($colorData['sizes'] ?? [] as $sizeData) {
-                if (!isset($sizeData['size'], $sizeData['stock']))
-                    continue;
-
-                $colorProduct->sizes()->create([
-                    'size' => $sizeData['size'],
-                    'stock' => $sizeData['stock'],
-                ]);
+                if (isset($sizeData['size'], $sizeData['stock'])) {
+                    $colorProduct->sizes()->create([
+                        'size' => $sizeData['size'],
+                        'stock' => $sizeData['stock'],
+                    ]);
+                }
             }
         }
 
         return redirect()->back()->with('success', 'Product added successfully!');
     }
+
 
 }
 

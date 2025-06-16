@@ -266,8 +266,8 @@
 
             function addSize(button) {
                 const sizeTemplate = document.getElementById('size-template').content.cloneNode(true);
-                const container = button.previousElementSibling; // size-container
-                const colorBlock = button.closest('.color-block');
+               const colorBlock = button.closest('.color-block');
+                const container = colorBlock.querySelector('.size-container');
                 const index = [...document.getElementById('color-container').children].indexOf(colorBlock);
 
                 // Create new inputs with indexed names
