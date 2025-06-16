@@ -104,6 +104,7 @@
                         <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
                     </a>
                     <ul class="submenu">
+                            <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ route('admin.banners') }}">Banners</a></li>
                         <li><a href="{{ route('admin.addbanner') }}">Add banner</a></li>
                     </ul>
