@@ -114,7 +114,7 @@
                         <span class="micon dw dw-box"></span><span class="mtext">Products</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('admin.banners') }}">Products</a></li>
+                        <li><a href="{{ route('admin.products.show') }}">Products</a></li>
                         <li><a href="{{ route('admin.products.create') }}">Add product</a></li>
                     </ul>
                 </li>

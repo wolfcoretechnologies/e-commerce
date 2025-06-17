@@ -23,6 +23,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //Products
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/products/show', [ProductController::class, 'show'])->name('admin.products.show');
 
 });
 

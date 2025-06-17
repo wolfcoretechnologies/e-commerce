@@ -9,9 +9,9 @@ use App\Models\ProductImages;
 class PageController extends Controller
 {
     //
-   public function main()
+    public function main()
     {
-        $data=Products::all();
+        $data = Products::all();
 
         return view("main", compact('data'));
     }
@@ -27,6 +27,12 @@ class PageController extends Controller
         $product = Products::findOrFail($id);
         $productImages = ProductImages::where("product_id", $product->id)->get();
         $colorProducts = Products::where("parent_id", $product->id)->get();
-        return view('productdetail', compact('product', 'productImages', 'colorProducts'));
+        $sizes = Products::where('parent_id', $id)
+            ->whereNotNull('size_category')
+            ->select('size_category')
+            ->groupBy('size_category')
+            ->pluck('size_category');
+
+        return view('productdetail', compact('product', 'productImages', 'colorProducts', 'sizes'));
     }
 }

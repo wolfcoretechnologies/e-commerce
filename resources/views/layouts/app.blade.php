@@ -26,7 +26,11 @@
     </div>
     <div class="pageWrapper">
         <!--Search Form Drawer-->
-        @include('layouts.header')
+        @if (Route::currentRouteName() == 'home')
+            @include('layouts.header')
+        @else
+            @include('layouts.otherheader')
+        @endif
         <!--End Mobile Menu-->
 
         <!--Body Content-->
@@ -34,7 +38,7 @@
         <!--End Body Content-->
 
         <!--Footer-->
-       @include('layouts.footer')
+        @include('layouts.footer')
         <!--End Footer-->
         <!--Scoll Top-->
         <span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>

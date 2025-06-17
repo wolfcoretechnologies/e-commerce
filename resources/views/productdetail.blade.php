@@ -9,8 +9,10 @@
             <!--Breadcrumb-->
             <div class="bredcrumbWrap">
                 <div class="container breadcrumbs">
-                    <a href="{{ route('home') }}" title="Back to the home page">Home</a><span
-                        aria-hidden="true">›</span><span> {{$product->name}}</span>
+                    <a href="{{ route('home') }}" title="Back to the home page">Home</a>
+                    @if($product->name)
+                    <span aria-hidden="true">›</span><span> {{$product->name}}</span>
+                    @endif
                 </div>
             </div>
             <!--End Breadcrumb-->
@@ -69,19 +71,19 @@
                             <div class="prFeatures">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                        <img src="assets/images/credit-card.png" alt="Safe Payment" title="Safe Payment" />
+                                        <img src="{{ asset('assets/images/credit-card.png') }}" alt="Safe Payment" title="Safe Payment" />
                                         <div class="details">
                                             <h3>Safe Payment</h3>Pay with the world's most payment methods.
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                        <img src="assets/images/shield.png" alt="Confidence" title="Confidence" />
+                                        <img src="{{ asset('assets/images/shield.png') }}" alt="Confidence" title="Confidence" />
                                         <div class="details">
                                             <h3>Confidence</h3>Protection covers your purchase and personal data.
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                        <img src="assets/images/worldwide.png" alt="Worldwide Delivery"
+                                        <img src="{{ asset('assets/images/worldwide.png') }}" alt="Worldwide Delivery"
                                             title="Worldwide Delivery" />
                                         <div class="details">
                                             <h3>Worldwide Delivery</h3>FREE &amp; fast shipping to over 200+
@@ -89,7 +91,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                        <img src="assets/images/phone-call.png" alt="Hotline" title="Hotline" />
+                                        <img src="{{ asset('assets/images/phone-call.png') }}" alt="Hotline" title="Hotline" />
                                         <div class="details">
                                             <h3>Hotline</h3>Talk to help line for your question on 4141 456 789,
                                             4125 666 888
@@ -121,7 +123,8 @@
                                     <s id="ComparePrice-product-template"><span class="money">{{$product->price}}</span></s>
                                     <span
                                         class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
-                                        <span id="ProductPrice-product-template"><span class="money">${{$product->discount_price}}</span></span>
+                                        <span id="ProductPrice-product-template"><span
+                                                class="money">${{$product->discount_price}}</span></span>
                                     </span>
                                     <span class="discount-badge"> <span class="devider">|</span>&nbsp;
                                         <span>You Save</span>
@@ -141,33 +144,32 @@
                                         <div class="product-form__item">
                                             <label class="header">Color:</label>
                                             @foreach($colorProducts as $colorProduct)
-                                            <div data-value="{{ $colorProduct->color_category }}" class="swatch-element color black available">
-                                                <input class="swatchInput" id="swatch-0-black" type="radio" name="option-0"
-                                                    value="{{ $colorProduct->color_category }}">
-                                                    <a href="/product/{{ $colorProduct->id }}  "><img height="50px" width="50" src="{{asset('storage/' . $colorProduct->image)}}" alt="{{ $colorProduct->color_category }}"></a>
-                                            </div>
+                                                <div data-value="{{ $colorProduct->color_category }}"
+                                                    class="swatch-element color black available">
+                                                    <input class="swatchInput" id="swatch-0-black" type="radio" name="option-0"
+                                                        value="{{ $colorProduct->color_category }}">
+                                                    <a href="/product/{{ $colorProduct->id }}  "><img height="50px" width="50"
+                                                            src="{{asset('storage/' . $colorProduct->image)}}"
+                                                            alt="{{ $colorProduct->color_category }}"></a>
+                                                </div>
                                             @endforeach
 
                                         </div>
                                     </div>
                                     <div class="swatch clearfix swatch-1 option2" data-option-index="1">
                                         <div class="product-form__item">
-                                            <label class="header">Size: <span class="slVariant">XS</span></label>
+                                            <label class="header">Size: </label>
+                                            @if($sizes)
+                                            @foreach ($sizes as $size)
+
                                             <div data-value="XS" class="swatch-element xs available">
                                                 <input class="swatchInput" id="swatch-1-xs" type="radio" name="option-1"
-                                                    value="XS">
-                                                <label class="swatchLbl small" for="swatch-1-xs" title="XS">XS</label>
+                                                    value="{{ $size }}">
+                                                <label class="swatchLbl small" for="swatch-1-xs" title="XS">{{ $size }}</label>
                                             </div>
-                                            <div data-value="S" class="swatch-element s available">
-                                                <input class="swatchInput" id="swatch-1-s" type="radio" name="option-1"
-                                                    value="S">
-                                                <label class="swatchLbl small" for="swatch-1-s" title="S">S</label>
-                                            </div>
-                                            <div data-value="M" class="swatch-element m available">
-                                                <input class="swatchInput" id="swatch-1-m" type="radio" name="option-1"
-                                                    value="M">
-                                                <label class="swatchLbl small" for="swatch-1-m" title="M">M</label>
-                                            </div>
+                                            @endforeach
+                                            @endif
+
                                         </div>
                                     </div>
 

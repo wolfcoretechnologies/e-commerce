@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+
+    public function show()
+    {
+        $products = Products::orderBy("id", "desc")->paginate(10);
+        return view("admin.products.products", compact("products"));
+    }
     public function create()
     {
         return view('admin.products.create');
