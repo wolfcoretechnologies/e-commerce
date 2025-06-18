@@ -105,6 +105,13 @@ class ProductController extends Controller
                 ]);
             }
 
+            foreach (json_decode($colorData['gallery'] ?? '[]', true) as $img) {
+                ProductImages::create([
+                    'product_id' => $colorProduct->id,
+                    'image' => $img
+                ]);
+            }
+
             // Sizes
             foreach ($colorData['sizes'] ?? [] as $sizeData) {
                 if (isset($sizeData['size'], $sizeData['stock'])) {

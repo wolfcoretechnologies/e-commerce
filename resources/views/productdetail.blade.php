@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product->name)
+@section('title', $viewedProduct->name)
 
 @section('content')
     <div id="page-content">
@@ -10,8 +10,8 @@
             <div class="bredcrumbWrap">
                 <div class="container breadcrumbs">
                     <a href="{{ route('home') }}" title="Back to the home page">Home</a>
-                    @if($product->name)
-                    <span aria-hidden="true">›</span><span> {{$product->name}}</span>
+                    @if($viewedProduct->name)
+                        <span aria-hidden="true">›</span><span> {{$viewedProduct->name}}</span>
                     @endif
                 </div>
             </div>
@@ -26,8 +26,8 @@
                                 <div class="zoompro-wrap product-zoom-right pl-20">
                                     <div class="zoompro-span">
                                         <img class="blur-up lazyload zoompro"
-                                            data-zoom-image="{{asset('storage/' . $product->image)}}" alt=""
-                                            src="{{asset('storage/' . $product->image)}}" />
+                                            data-zoom-image="{{asset('storage/' . $viewedProduct->image)}}" alt=""
+                                            src="{{asset('storage/' . $viewedProduct->image)}}" />
                                     </div>
                                     <div class="product-labels"><span class="lbl on-sale">Sale</span><span
                                             class="lbl pr-label1">new</span></div>
@@ -40,11 +40,11 @@
                                 </div>
                                 <div class="product-thumb product-thumb-1">
                                     <div id="gallery" class="product-dec-slider-1 product-tab-left">
-                                        <a data-image="{{asset('storage/' . $product->image)}}"
-                                            data-zoom-image="{{asset('storage/' . $product->image)}}"
+                                        <a data-image="{{asset('storage/' . $viewedProduct->image)}}"
+                                            data-zoom-image="{{asset('storage/' . $viewedProduct->image)}}"
                                             class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true"
                                             tabindex="-1">
-                                            <img class="blur-up lazyload" src="{{asset('storage/' . $product->image)}}"
+                                            <img class="blur-up lazyload" src="{{asset('storage/' . $viewedProduct->image)}}"
                                                 alt="" />
                                         </a>
                                         @foreach($productImages as $productImage)
@@ -60,7 +60,7 @@
                                     </div>
                                 </div>
                                 <div class="lightboximages">
-                                    <a href="{{asset('storage/' . $product->image)}}" data-size="1462x2048"></a>
+                                    <a href="{{asset('storage/' . $viewedProduct->image)}}" data-size="1462x2048"></a>
                                     @foreach($productImages as $productImage)
                                         <a href="{{asset('storage/' . $productImage->image)}}" data-size="1462x2048"></a>
                                     @endforeach
@@ -71,13 +71,15 @@
                             <div class="prFeatures">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                        <img src="{{ asset('assets/images/credit-card.png') }}" alt="Safe Payment" title="Safe Payment" />
+                                        <img src="{{ asset('assets/images/credit-card.png') }}" alt="Safe Payment"
+                                            title="Safe Payment" />
                                         <div class="details">
                                             <h3>Safe Payment</h3>Pay with the world's most payment methods.
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                        <img src="{{ asset('assets/images/shield.png') }}" alt="Confidence" title="Confidence" />
+                                        <img src="{{ asset('assets/images/shield.png') }}" alt="Confidence"
+                                            title="Confidence" />
                                         <div class="details">
                                             <h3>Confidence</h3>Protection covers your purchase and personal data.
                                         </div>
@@ -91,7 +93,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                        <img src="{{ asset('assets/images/phone-call.png') }}" alt="Hotline" title="Hotline" />
+                                        <img src="{{ asset('assets/images/phone-call.png') }}" alt="Hotline"
+                                            title="Hotline" />
                                         <div class="details">
                                             <h3>Hotline</h3>Talk to help line for your question on 4141 456 789,
                                             4125 666 888
@@ -103,7 +106,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="product-single__meta">
-                                <h1 class="product-single__title">{{$product->name}}</h1>
+                                <h1 class="product-single__title">{{$viewedProduct->name}}</h1>
                                 <div class="product-nav clearfix">
                                     <a href="#" class="next" title="Next"><i class="fa fa-angle-right"
                                             aria-hidden="true"></i></a>
@@ -120,22 +123,34 @@
                                 </div>
                                 <p class="product-single__price product-single__price-product-template">
                                     <span class="visually-hidden">Regular price</span>
-                                    <s id="ComparePrice-product-template"><span class="money">{{$product->price}}</span></s>
+                                    <s id="ComparePrice-product-template"><span
+                                            class="money">{{$viewedProduct->price}}</span></s>
                                     <span
                                         class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
                                         <span id="ProductPrice-product-template"><span
-                                                class="money">${{$product->discount_price}}</span></span>
+                                                class="money">${{$viewedProduct->discount_price}}</span></span>
                                     </span>
-                                    <span class="discount-badge"> <span class="devider">|</span>&nbsp;
-                                        <span>You Save</span>
-                                        <span id="SaveAmount-product-template" class="product-single__save-amount">
-                                            <span class="money">$100.00</span>
+                                    @if($viewedProduct->discount_price)
+                                        @php
+                                            $savePrice = (float) $viewedProduct->price - (float) $viewedProduct->discount_price;
+                                        @endphp
+                                        <span class="discount-badge">
+                                            <span class="devider">|</span>&nbsp;
+                                            <span>You Save</span>
+                                            <span id="SaveAmount-product-template" class="product-single__save-amount">
+                                                <span class="money">{{ number_format($savePrice, 2) }}</span>
+                                            </span>
+                                            <span class="off">(
+                                                <span>
+                                                    {{ number_format((($savePrice / $viewedProduct->price) * 100), 0) }}
+                                                </span>%
+                                                )</span>
                                         </span>
-                                        <span class="off">(<span>16</span>%)</span>
-                                    </span>
+                                    @endif
+
                                 </p>
                                 <div class="product-single__description rte">
-                                    <p>{{$product->small_description}}</p>
+                                    <p>{{$viewedProduct->small_description}}</p>
                                 </div>
                                 <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282"
                                     accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown"
@@ -144,15 +159,23 @@
                                         <div class="product-form__item">
                                             <label class="header">Color:</label>
                                             @foreach($colorProducts as $colorProduct)
-                                                <div data-value="{{ $colorProduct->color_category }}"
-                                                    class="swatch-element color black available">
-                                                    <input class="swatchInput" id="swatch-0-black" type="radio" name="option-0"
-                                                        value="{{ $colorProduct->color_category }}">
-                                                    <a href="/product/{{ $colorProduct->id }}  "><img height="50px" width="50"
-                                                            src="{{asset('storage/' . $colorProduct->image)}}"
-                                                            alt="{{ $colorProduct->color_category }}"></a>
-                                                </div>
+                                                                <div data-value="{{ $colorProduct->color_category }}"
+                                                                    class="swatch-element color {{ strtolower($colorProduct->color_category) }} available">
+
+                                                                    <input class="swatchInput"
+                                                                        id="swatch-0-{{ strtolower($colorProduct->color_category) }}"
+                                                                        type="radio" name="option-0" value="{{ $colorProduct->color_category }}"
+                                                                        {{ $viewedProduct->id == $colorProduct->id ? 'checked' : '' }}>
+
+                                                                    <a href="{{ url('/product/' . $colorProduct->id) }}">
+                                                                        <img height="50px" width="50"
+                                                                            src="{{ asset('storage/' . $colorProduct->image) }}"
+                                                                            alt="{{ $colorProduct->color_category }}" style="border: {{ $viewedProduct->id == $colorProduct->id ? '2px solid #007bff' : '1px solid #ccc' }};
+                                                border-radius: 5px;">
+                                                                    </a>
+                                                                </div>
                                             @endforeach
+
 
                                         </div>
                                     </div>
@@ -160,14 +183,15 @@
                                         <div class="product-form__item">
                                             <label class="header">Size: </label>
                                             @if($sizes)
-                                            @foreach ($sizes as $size)
+                                                @foreach ($sizes as $size)
 
-                                            <div data-value="XS" class="swatch-element xs available">
-                                                <input class="swatchInput" id="swatch-1-xs" type="radio" name="option-1"
-                                                    value="{{ $size }}">
-                                                <label class="swatchLbl small" for="swatch-1-xs" title="XS">{{ $size }}</label>
-                                            </div>
-                                            @endforeach
+                                                    <div data-value="{{ $size }}" class="swatch-element xs available">
+                                                        <input class="swatchInput" id="swatch-1-xs" type="radio" name="option-1"
+                                                            value="{{ $size }}">
+                                                        <label class="swatchLbl small" for="swatch-1-xs"
+                                                            title="XS">{{ $size }}</label>
+                                                    </div>
+                                                @endforeach
                                             @endif
 
                                         </div>
@@ -613,13 +637,13 @@
                                     <a href="short-description.html">
                                         <!-- image -->
                                         <img class="primary blur-up lazyload"
-                                            data-src="{{asset('storage/' . $product->image)}}"
-                                            src="{{asset('storage/' . $product->image)}}" alt="image" title="product">
+                                            data-src="{{asset('storage/' . $viewedProduct->image)}}"
+                                            src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" title="product">
                                         <!-- End image -->
                                         <!-- Hover image -->
                                         <img class="hover blur-up lazyload"
-                                            data-src="{{asset('storage/' . $product->image)}}"
-                                            src="{{asset('storage/' . $product->image)}}" alt="image" title="product">
+                                            data-src="{{asset('storage/' . $viewedProduct->image)}}"
+                                            src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" title="product">
                                         <!-- End hover image -->
                                         <!-- product label -->
                                         <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span
@@ -679,16 +703,21 @@
                                     </div>
                                     <!-- Variant -->
                                     <ul class="swatches">
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
 
                                     </ul>
                                     <!-- End Variant -->
@@ -1110,13 +1139,13 @@
                                     <a href="short-description.html">
                                         <!-- image -->
                                         <img class="primary blur-up lazyload"
-                                            data-src="{{asset('storage/' . $product->image)}}"
-                                            src="{{asset('storage/' . $product->image)}}" alt="image" title="product">
+                                            data-src="{{asset('storage/' . $viewedProduct->image)}}"
+                                            src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" title="product">
                                         <!-- End image -->
                                         <!-- Hover image -->
                                         <img class="hover blur-up lazyload"
-                                            data-src="{{asset('storage/' . $product->image)}}"
-                                            src="{{asset('storage/' . $product->image)}}" alt="image" title="product">
+                                            data-src="{{asset('storage/' . $viewedProduct->image)}}"
+                                            src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" title="product">
                                         <!-- End hover image -->
                                         <!-- product label -->
                                         <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span
@@ -1176,16 +1205,21 @@
                                     </div>
                                     <!-- Variant -->
                                     <ul class="swatches">
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
-                                        <li class="swatch medium rounded"><img src="{{asset('storage/' . $product->image)}}"
-                                                alt="image" width="50" height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
+                                        <li class="swatch medium rounded"><img
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="image" width="50"
+                                                height="50" /></li>
 
                                     </ul>
                                     <!-- End Variant -->

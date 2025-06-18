@@ -149,6 +149,28 @@
             <input type="hidden" name="colors[][image]" class="color-image-path">
 
             <div class="dropzone text-center border p-3 mb-2">Upload Color Image</div>
+            <input type="hidden" class="color-gallery-input" name="colors[][gallery]">
+
+            <div class="dropzone color-gallery-dropzone text-center border p-3 mb-2">
+                <div class="dz-message">
+                    <strong>Drop additional color images here or click to upload</strong><br>
+                    (Multiple images allowed)
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <input type="number" step="0.01" name="colors[][price]" placeholder="Price" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <input type="number" step="0.01" name="colors[][discount_price]" placeholder="Discount Price"
+                        class="form-control">
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <textarea name="colors[][description]" class="form-control" placeholder="Full Description"></textarea>
+            </div>
 
             <div class="size-container">
                 <!-- Size rows will go here -->
@@ -162,8 +184,12 @@
 
     <template id="size-template">
         <div class="size-row d-flex gap-2 mb-2">
-            <input type="text" name="size" placeholder="Size (e.g. M)" class="form-control">
-            <input type="number" name="stock" placeholder="Stock" class="form-control">
+            <div class="col-md-6">
+                <input type="text" name="size" placeholder="Size (e.g. M)" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <input type="number" name="stock" placeholder="Stock" class="form-control">
+            </div>
         </div>
     </template>
 
@@ -235,38 +261,78 @@
             function addColor() {
                 const template = document.getElementById('color-template').content.cloneNode(true);
                 const colorBlock = template.querySelector('.color-block');
+
+                // Elements for main color image
                 const dropzoneDiv = colorBlock.querySelector('.dropzone');
                 const hiddenInput = colorBlock.querySelector('.color-image-path');
-                const colorNameInput = colorBlock.querySelector('input[name="colors[][name]"]');
+                const colorNameInput = colorBlock.querySelector('input[placeholder="Color Name"]');
 
-                // Update name attributes with proper index
+                // Elements for gallery images
+                const galleryDropzoneDiv = colorBlock.querySelector('.color-gallery-dropzone');
+                const galleryInput = colorBlock.querySelector('.color-gallery-input');
+
+                // Update input names with correct color index
                 colorNameInput.name = `colors[${colorIndex}][name]`;
                 hiddenInput.name = `colors[${colorIndex}][image]`;
+                galleryInput.name = `colors[${colorIndex}][gallery]`;
 
-                // Assign unique dropzone ID
+                // Update extra fields (price, discount, description)
+                colorBlock.querySelector('input[placeholder="Price"]').name = `colors[${colorIndex}][price]`;
+                colorBlock.querySelector('input[placeholder="Discount Price"]').name = `colors[${colorIndex}][discount_price]`;
+                colorBlock.querySelector('textarea[placeholder="Full Description"]').name = `colors[${colorIndex}][description]`;
+
+                // Assign unique Dropzone IDs
                 dropzoneDiv.id = `dropzone-${colorIndex}`;
+                galleryDropzoneDiv.id = `gallery-dropzone-${colorIndex}`;
 
+                // Init main image Dropzone
                 setTimeout(() => {
                     new Dropzone(`#${dropzoneDiv.id}`, {
                         url: "/admin/upload-temp-image",
                         maxFiles: 1,
                         params: { folder: 'products' },
                         acceptedFiles: "image/*",
-                        headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        },
                         success: function (file, response) {
                             hiddenInput.value = response.paths[0];
                         }
                     });
                 }, 10);
 
+                // Init gallery Dropzone (multiple)
+                setTimeout(() => {
+                    new Dropzone(`#${galleryDropzoneDiv.id}`, {
+                        url: "/admin/upload-temp-image",
+                        method: 'POST',
+                        params: { folder: 'products' },
+                        uploadMultiple: false,
+                        acceptedFiles: "image/*",
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        },
+                        success: function (file, response) {
+                            let existing = galleryInput.value ? JSON.parse(galleryInput.value) : [];
+                            existing.push(response.paths[0]);
+                            galleryInput.value = JSON.stringify(existing);
+                        },
+                        error: function (file, response) {
+                            console.error("Color gallery upload failed:", response);
+                        }
+                    });
+                }, 10);
+
+                // Add color block to container
                 document.getElementById('color-container').appendChild(colorBlock);
                 colorIndex++;
             }
 
 
+
             function addSize(button) {
                 const sizeTemplate = document.getElementById('size-template').content.cloneNode(true);
-               const colorBlock = button.closest('.color-block');
+                const colorBlock = button.closest('.color-block');
                 const container = colorBlock.querySelector('.size-container');
                 const index = [...document.getElementById('color-container').children].indexOf(colorBlock);
 

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 </head>
 
-<body class="template-index belle template-index-belle">
+<body class="template-index belle template-index-belle  {{ !Request::is('/') ? 'template-collection' : '' }}">
     <div id="pre-loader">
         <img src="assets/images/home-images/25.gif" alt="Loading..." />
     </div>
