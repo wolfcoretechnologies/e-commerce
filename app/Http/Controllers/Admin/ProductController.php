@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\ProductImages;
 use Illuminate\Support\Str;
+use App\Models\ProductSize;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -56,6 +57,18 @@ class ProductController extends Controller
                 'image' => $request->image
             ]);
 
+            foreach ($request->input('sizes', []) as $sizeData) {
+
+                ProductSize::create([
+                    'product_id' => $mainProduct->id,
+                    'size' => $sizeData['size'],
+                    'stock' => $sizeData['stock'],
+                    'price' => $sizeData['price'],
+                ]);
+            }
+
+
+
             if ($request->uploaded_images) {
                 foreach (json_decode($request->uploaded_images, true) as $img) {
                     ProductImages::create([
@@ -86,6 +99,8 @@ class ProductController extends Controller
                 'parent_id' => $groupId, // first one will be NULL
             ];
 
+
+
             $colorProduct = Products::create($productData);
 
             if ($index == 0) {
@@ -112,17 +127,27 @@ class ProductController extends Controller
                 ]);
             }
 
-            // Sizes
-            foreach ($colorData['sizes'] ?? [] as $sizeData) {
-                if (isset($sizeData['size'], $sizeData['stock'])) {
-                    $colorProduct->sizes()->create([
-                        'size' => $sizeData['size'],
-                        'stock' => $sizeData['stock'],
-                    ]);
+            // dd($colorData['sizes']);
+            $sizes = [];
+            $rawSizes = $colorData['sizes'] ?? [];
+
+            for ($i = 0; $i < count($rawSizes); $i += 2) {
+                if (isset($rawSizes[$i]['size']) && isset($rawSizes[$i + 1]['stock'])) {
+                    $sizes[] = [
+                        'size' => $rawSizes[$i]['size'],
+                        'stock' => $rawSizes[$i + 1]['stock'],
+                    ];
                 }
             }
-        }
 
+            foreach ($sizes as $sizeData) {
+                ProductSize::create([
+                    'product_id' => $colorProduct->id,
+                    'size' => $sizeData['size'],
+                    'stock' => $sizeData['stock'],
+                ]);
+            }
+        }
 
         return redirect()->back()->with('success', 'Product added successfully!');
     }

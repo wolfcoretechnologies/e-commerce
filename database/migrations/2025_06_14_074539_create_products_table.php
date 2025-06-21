@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('color_category')->nullable();
             $table->string('variation_category')->nullable();
             $table->integer('stock');
-            $table->unsignedBigInteger('parent_id')->nullable()->after('id');
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
         });
     }

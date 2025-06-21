@@ -185,11 +185,11 @@
                                             @if($sizes)
                                                 @foreach ($sizes as $size)
 
-                                                    <div data-value="{{ $size }}" class="swatch-element xs available">
+                                                    <div data-value="{{  $size->size }}" class="swatch-element xs available">
                                                         <input class="swatchInput" id="swatch-1-xs" type="radio" name="option-1"
-                                                            value="{{ $size }}">
+                                                            value="{{ $size->size }}">
                                                         <label class="swatchLbl small" for="swatch-1-xs"
-                                                            title="XS">{{ $size }}</label>
+                                                            title="XS">{{  $size->size }}</label>
                                                     </div>
                                                 @endforeach
                                             @endif
