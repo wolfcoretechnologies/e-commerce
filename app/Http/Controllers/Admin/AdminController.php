@@ -17,6 +17,10 @@ class AdminController extends Controller
     {
         return view('admin.profile');
     }
+    public function orders()
+    {
+        return view('admin.orders');
+    }
     public function store(Request $request)
     {
         // If the request is a POST, handle form submission

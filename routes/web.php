@@ -23,6 +23,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     //profile page 
     Route::get('admin/profile',[AdminController::class,'profile'])->name('admin.profile');
+
+    //orders
+
+    Route::get('admin/orders',[AdminController::class,'orders'])->name('admin.orders');
     //Products
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');

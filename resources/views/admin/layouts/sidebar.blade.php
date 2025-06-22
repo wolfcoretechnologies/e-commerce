@@ -118,6 +118,12 @@
                         <li><a href="{{ route('admin.products.create') }}">Add product</a></li>
                     </ul>
                 </li>
+                <li>
+						<a href="{{route('admin.orders')}}" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-shopping-cart"></span><span class="mtext">Orders</span>
+
+						</a>
+					</li>
             </ul>
         </div>
     </div>
