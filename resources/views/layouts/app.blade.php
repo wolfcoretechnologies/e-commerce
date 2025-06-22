@@ -32,7 +32,7 @@
             @include('layouts.otherheader')
         @endif
         <!--End Mobile Menu-->
- @include('layouts.header')
+
         <!--Body Content-->
         @yield('content')
         <!--End Body Content-->
