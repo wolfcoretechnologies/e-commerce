@@ -44,8 +44,8 @@
                                             data-zoom-image="{{asset('storage/' . $viewedProduct->image)}}"
                                             class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true"
                                             tabindex="-1">
-                                            <img class="blur-up lazyload" src="{{asset('storage/' . $viewedProduct->image)}}"
-                                                alt="" />
+                                            <img class="blur-up lazyload"
+                                                src="{{asset('storage/' . $viewedProduct->image)}}" alt="" />
                                         </a>
                                         @foreach($productImages as $productImage)
                                             <a data-image="{{asset('storage/' . $productImage->image)}}"
@@ -60,9 +60,9 @@
                                     </div>
                                 </div>
                                 <div class="lightboximages">
-                                    <a href="{{asset('storage/' . $viewedProduct->image)}}" data-size="1462x2048"></a>
+                                    {{-- <a href="{{asset('storage/' . $viewedProduct->image)}}" data-size="1462x2048"></a> --}}
                                     @foreach($productImages as $productImage)
-                                        <a href="{{asset('storage/' . $productImage->image)}}" data-size="1462x2048"></a>
+                                        <a href="{{asset('storage/' . $viewedProduct->image)}}" data-size="1462x2048"></a>
                                     @endforeach
                                 </div>
 
@@ -159,21 +159,21 @@
                                         <div class="product-form__item">
                                             <label class="header">Color:</label>
                                             @foreach($colorProducts as $colorProduct)
-                                                                <div data-value="{{ $colorProduct->color_category }}"
-                                                                    class="swatch-element color {{ strtolower($colorProduct->color_category) }} available">
+                                                <div data-value="{{ $colorProduct->color_category }}"
+                                                    class="swatch-element color {{ strtolower($colorProduct->color_category) }} available">
 
-                                                                    <input class="swatchInput"
-                                                                        id="swatch-0-{{ strtolower($colorProduct->color_category) }}"
-                                                                        type="radio" name="option-0" value="{{ $colorProduct->color_category }}"
-                                                                        {{ $viewedProduct->id == $colorProduct->id ? 'checked' : '' }}>
+                                                    <input class="swatchInput"
+                                                        id="swatch-0-{{ strtolower($colorProduct->color_category) }}"
+                                                        type="radio" name="option-0" value="{{ $colorProduct->color_category }}"
+                                                        {{ $viewedProduct->id == $colorProduct->id ? 'checked' : '' }}>
 
-                                                                    <a href="{{ url('/product/' . $colorProduct->id) }}">
-                                                                        <img height="50px" width="50"
-                                                                            src="{{ asset('storage/' . $colorProduct->image) }}"
-                                                                            alt="{{ $colorProduct->color_category }}" style="border: {{ $viewedProduct->id == $colorProduct->id ? '2px solid #007bff' : '1px solid #ccc' }};
-                                                border-radius: 5px;">
-                                                                    </a>
-                                                                </div>
+                                                    <a href="{{ url('/product/' . $colorProduct->id) }}">
+                                                        <img height="50px" width="50"
+                                                            src="{{ asset('storage/' . $colorProduct->image) }}"
+                                                            alt="{{ $colorProduct->color_category }}" style="border: {{ $viewedProduct->id == $colorProduct->id ? '2px solid #007bff' : '1px solid #ccc' }};
+                                                        border-radius: 5px;">
+                                                    </a>
+                                                </div>
                                             @endforeach
 
 
@@ -183,17 +183,20 @@
                                         <div class="product-form__item">
                                             <label class="header">Size: </label>
                                             @if($sizes)
-                                                @foreach ($sizes as $size)
-
-                                                    <div data-value="{{  $size->size }}" class="swatch-element xs available">
-                                                        <input class="swatchInput" id="swatch-1-xs" type="radio" name="option-1"
+                                                @foreach ($sizes as $index => $size)
+                                                    @php
+                                                        $sizeValue = strtolower($size->size);
+                                                        $inputId = 'swatch-1-' . $sizeValue . '-' . $index;
+                                                    @endphp
+                                                    <div data-value="{{ $size->size }}"
+                                                        class="swatch-element {{ $sizeValue }} available">
+                                                        <input class="swatchInput" id="{{ $inputId }}" type="radio" name="option-1"
                                                             value="{{ $size->size }}">
-                                                        <label class="swatchLbl small" for="swatch-1-xs"
-                                                            title="XS">{{  $size->size }}</label>
+                                                        <label class="swatchLbl small" for="{{ $inputId }}"
+                                                            title="{{ $size->size }}">{{ $size->size }}</label>
                                                     </div>
                                                 @endforeach
                                             @endif
-
                                         </div>
                                     </div>
 
