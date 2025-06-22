@@ -20,6 +20,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::match(['get', 'post'], '/admin/banner/addbanner', [AdminController::class, 'store'])->name('admin.addbanner');
 
+
+    //profile page 
+    Route::get('admin/profile',[AdminController::class,'profile'])->name('admin.profile');
     //Products
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');

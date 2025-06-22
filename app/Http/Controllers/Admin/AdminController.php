@@ -13,6 +13,10 @@ class AdminController extends Controller
         $banners = Banner::where('status', 'active')->get();
         return view('admin.banner', compact('banners'));
     }
+    public function profile()
+    {
+        return view('admin.profile');
+    }
     public function store(Request $request)
     {
         // If the request is a POST, handle form submission
