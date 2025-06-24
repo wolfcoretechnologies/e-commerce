@@ -256,6 +256,7 @@
         <script src="{{ asset('assets/js/popper.min.js') }}"></script>
         <script src="{{ asset('assets/js/lazysizes.js') }}"></script>
         <script src="{{ asset('assets/js/main.js')  }}"></script>
+        @yield('script')
     </div>
 </body>
 

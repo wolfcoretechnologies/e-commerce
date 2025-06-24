@@ -37,21 +37,23 @@ class PageController extends Controller
 
         // Get all color products including the main product
         $colorProducts = Products::where("parent_id", $mainProduct->id)->get();
-
-         $sizes = ProductSize::where("product_id", $mainProduct->id)->get();
-
+        $sizes = ProductSize::where("product_id", $mainProduct->id)->get(); // ✅ Fix here
+        // dd($sizes);
         // Include the main product in the list
         $colorProducts->push($mainProduct);
 
-        // // Get sizes
-        // $sizes = Products::where('parent_id', $mainProduct->id)
-        //     ->whereNotNull('size_category')
-        //     ->select('size_category')
-        //     ->groupBy('size_category')
-        //     ->pluck('size_category');
+        $sizePrices = collect($sizes)->mapWithKeys(function ($s) {
+            return [
+                $s->size => [
+                    'price' => $s->price,
+                    'discount_price' => $s->discount_price,
+                    'source_price' => $s->source_price,
+                ]
+            ];
+        });
 
-        // Send both viewed and main product
-        return view('productdetail', compact('mainProduct', 'viewedProduct', 'productImages', 'colorProducts', 'sizes'));
+
+        return view('productdetail', compact('mainProduct', 'viewedProduct', 'productImages', 'colorProducts', 'sizes', 'sizePrices'));
 
     }
 }

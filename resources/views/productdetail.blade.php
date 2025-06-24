@@ -143,7 +143,7 @@
                                                     <span class="money">{{ number_format($savePrice, 2) }}</span>
                                                 </span>
                                                 <span class="off">(
-                                                    <span>
+                                                    <span id="discount-percent">
                                                         {{ number_format((($savePrice / $viewedProduct->price) * 100), 0) }}
                                                     </span>%)
                                                 </span>
@@ -175,8 +175,9 @@
                                                     <a href="{{ url('/product/' . $colorProduct->id) }}">
                                                         <img height="50px" width="50"
                                                             src="{{ asset('storage/' . $colorProduct->image) }}"
-                                                            alt="{{ $colorProduct->color_category }}" style="border: {{ $viewedProduct->id == $colorProduct->id ? '2px solid #007bff' : '1px solid #ccc' }};
-                                                                border-radius: 5px;">
+                                                            alt="{{ $colorProduct->color_category }}"
+                                                            style="border: {{ $viewedProduct->id == $colorProduct->id ? '2px solid #007bff' : '1px solid #ccc' }};
+                                                                                                                                                                border-radius: 5px;">
                                                     </a>
                                                 </div>
                                             @endforeach
@@ -1479,4 +1480,47 @@
         </div>
         <!--End Body Content-->
     </div>
+
+    @section('script')
+        <script>
+            const sizePrices = @json($sizePrices);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                console.log("Loaded and sizePrices:", sizePrices);
+
+                const radios = document.querySelectorAll('.swatchInput[name="option-1"]');
+
+                radios.forEach(radio => {
+                    radio.addEventListener('change', handleSizeChange);
+                });
+
+                // Trigger price update for default selected size (if any)
+                const selected = document.querySelector('.swatchInput[name="option-1"]:checked');
+                if (selected) {
+                    handleSizeChange.call(selected); // manually trigger handler
+                }
+            });
+
+            function handleSizeChange() {
+                const size = this.value;
+                const data = sizePrices[size];
+                console.log("Selected size:", size, data);
+
+                if (!data) return;
+
+                const price = parseFloat(data.price);
+                const discount = parseFloat(data.discount_price);
+                const save = price - discount;
+                const percent = price > 0 ? ((save / price) * 100).toFixed(0) : 0;
+
+                document.getElementById('ComparePrice-product-template')?.innerHTML = `<span class="money">$${price.toFixed(2)}</span>`;
+                document.getElementById('ProductPrice-product-template')?.innerHTML = `<span class="money">$${discount.toFixed(2)}</span>`;
+                document.getElementById('SaveAmount-product-template')?.innerHTML = `<span class="money">$${save.toFixed(2)}</span>`;
+                document.getElementById('discount-percent')?.innerText = percent;
+            }
+        </script>
+    @endsection
+
+
+
 @endsection

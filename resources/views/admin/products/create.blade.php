@@ -217,22 +217,22 @@
                 row.classList.add('mb-3', 'row');
 
                 row.innerHTML = `
-                                                <div class="col-md-2">
-                                                    <input type="text" name="sizes[${mainSizeIndex}][size]" placeholder="Size (e.g. M)" class="form-control" required>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="number" name="sizes[${mainSizeIndex}][stock]" placeholder="Stock" class="form-control" required>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="number" step="0.01" name="sizes[${mainSizeIndex}][price]" placeholder="Price" class="form-control" required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="number" step="0.01" name="sizes[${mainSizeIndex}][discount_price]" placeholder="Discount Price" class="form-control" required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="number" step="0.01" name="sizes[${mainSizeIndex}][source_price]" placeholder="Source Price" class="form-control" required>
-                                                </div>
-                                            `;
+                                                        <div class="col-md-2">
+                                                            <input type="text" name="sizes[${mainSizeIndex}][size]" placeholder="Size (e.g. M)" class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="number" name="sizes[${mainSizeIndex}][stock]" placeholder="Stock" class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="number" step="0.01" name="sizes[${mainSizeIndex}][price]" placeholder="Price" class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="number" step="0.01" name="sizes[${mainSizeIndex}][discount_price]" placeholder="Discount Price" class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="number" step="0.01" name="sizes[${mainSizeIndex}][source_price]" placeholder="Source Price" class="form-control" required>
+                                                        </div>
+                                                    `;
 
                 container.appendChild(row);
                 mainSizeIndex++;
@@ -397,15 +397,22 @@
                 const sizeTemplate = document.getElementById('size-template').content.cloneNode(true);
                 const colorBlock = button.closest('.color-block');
                 const container = colorBlock.querySelector('.size-container');
-                const index = [...document.getElementById('color-container').children].indexOf(colorBlock);
+                const colorIndex = [...document.getElementById('color-container').children].indexOf(colorBlock);
 
-                // Create new inputs with indexed names
-                sizeTemplate.querySelector('input[placeholder="Size (e.g. M)"]').name = `colors[${index}][sizes][][size]`;
-                sizeTemplate.querySelector('input[placeholder="Stock"]').name = `colors[${index}][sizes][][stock]`;
-                sizeTemplate.querySelector('input[ placeholder="Price"]').name = `colors[${index}][sizes][][price]`;
-                sizeTemplate.querySelector('input[ placeholder="Discount price"]').name = `colors[${index}][sizes][][discount_price]`;
-                sizeTemplate.querySelector('input[ placeholder="Source price"]').name = `colors[${index}][sizes][][source_price]`;
+                // Initialize or get size index for this color block
+                let sizeIndex = colorBlock.dataset.sizeIndex ? parseInt(colorBlock.dataset.sizeIndex) : 0;
+
+                // Update input names using colorIndex and sizeIndex
+                sizeTemplate.querySelector('input[placeholder="Size (e.g. M)"]').name = `colors[${colorIndex}][sizes][${sizeIndex}][size]`;
+                sizeTemplate.querySelector('input[placeholder="Stock"]').name = `colors[${colorIndex}][sizes][${sizeIndex}][stock]`;
+                sizeTemplate.querySelector('input[placeholder="Price"]').name = `colors[${colorIndex}][sizes][${sizeIndex}][price]`;
+                sizeTemplate.querySelector('input[placeholder="Discount price"]').name = `colors[${colorIndex}][sizes][${sizeIndex}][discount_price]`;
+                sizeTemplate.querySelector('input[placeholder="Source price"]').name = `colors[${colorIndex}][sizes][${sizeIndex}][source_price]`;
+
                 container.appendChild(sizeTemplate);
+
+                // Increment and store the size index for this block
+                colorBlock.dataset.sizeIndex = sizeIndex + 1;
             }
 
 

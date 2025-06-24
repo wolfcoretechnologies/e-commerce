@@ -50,6 +50,8 @@ class ProductController extends Controller
                 'image' => $request->image
             ]);
 
+
+
             foreach ($request->input('sizes', []) as $sizeData) {
 
                 ProductSize::create([
@@ -122,23 +124,12 @@ class ProductController extends Controller
             }
 
             // dd($colorData['sizes']);
-            $sizes = [];
+
             $rawSizes = $colorData['sizes'] ?? [];
 
 
-            for ($i = 0; $i < count($rawSizes); $i += 2) {
-                if (isset($rawSizes[$i]['size']) && isset($rawSizes[$i + 1]['stock'])) {
-                    $sizes[] = [
-                        'size' => $rawSizes[$i]['size'],
-                        'stock' => $rawSizes[$i + 1]['stock'],
-                        'price' => $rawSizes[$i + 2]['price'],
-                        'discount_price' => $rawSizes[$i + 3]['discount_price'],
-                        'source_price' =>  $rawSizes[$i + 4]['source_price']
-                    ];
-                }
-            }
+            foreach ($rawSizes as $sizeData) {
 
-            foreach ($sizes as $sizeData) {
                 ProductSize::create([
                     'product_id' => $colorProduct->id,
                     'size' => $sizeData['size'],
