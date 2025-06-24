@@ -60,7 +60,8 @@
                                     </div>
                                 </div>
                                 <div class="lightboximages">
-                                    {{-- <a href="{{asset('storage/' . $viewedProduct->image)}}" data-size="1462x2048"></a> --}}
+                                    {{-- <a href="{{asset('storage/' . $viewedProduct->image)}}" data-size="1462x2048"></a>
+                                    --}}
                                     @foreach($productImages as $productImage)
                                         <a href="{{asset('storage/' . $viewedProduct->image)}}" data-size="1462x2048"></a>
                                     @endforeach
@@ -137,14 +138,18 @@
                                         <span class="discount-badge">
                                             <span class="devider">|</span>&nbsp;
                                             <span>You Save</span>
-                                            <span id="SaveAmount-product-template" class="product-single__save-amount">
-                                                <span class="money">{{ number_format($savePrice, 2) }}</span>
-                                            </span>
-                                            <span class="off">(
-                                                <span>
-                                                    {{ number_format((($savePrice / $viewedProduct->price) * 100), 0) }}
-                                                </span>%
-                                                )</span>
+                                            @if($viewedProduct->price > 0)
+                                                <span id="SaveAmount-product-template" class="product-single__save-amount">
+                                                    <span class="money">{{ number_format($savePrice, 2) }}</span>
+                                                </span>
+                                                <span class="off">(
+                                                    <span>
+                                                        {{ number_format((($savePrice / $viewedProduct->price) * 100), 0) }}
+                                                    </span>%)
+                                                </span>
+                                            @else
+                                                <span class="text-muted">No discount</span>
+                                            @endif
                                         </span>
                                     @endif
 
@@ -171,7 +176,7 @@
                                                         <img height="50px" width="50"
                                                             src="{{ asset('storage/' . $colorProduct->image) }}"
                                                             alt="{{ $colorProduct->color_category }}" style="border: {{ $viewedProduct->id == $colorProduct->id ? '2px solid #007bff' : '1px solid #ccc' }};
-                                                        border-radius: 5px;">
+                                                                border-radius: 5px;">
                                                     </a>
                                                 </div>
                                             @endforeach
