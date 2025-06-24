@@ -28,16 +28,13 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'small_description' => 'required|string',
-            'price' => 'required|numeric',
-            'discount_price' => 'nullable|numeric',
             'description' => 'nullable|string',
             'size_category' => 'nullable|string',
             'color_category' => 'nullable|string',
             'variation_category' => 'nullable|string',
-            'stock' => 'required|integer',
             'image' => 'required|string',
             'uploaded_images' => 'nullable|string',
-            'colors' => 'required|array',
+            'colors' => 'array',
         ]);
 
         // Optional: store a generic product (main listing) if you want
@@ -45,15 +42,11 @@ class ProductController extends Controller
         if (!empty($request->image)) {
             $mainProduct = Products::create([
                 'name' => $request->name,
-                'slug' => $request->slug ?? Str::slug($request->name),
                 'small_description' => $request->small_description,
-                'price' => $request->price,
-                'discount_price' => $request->discount_price ?? 0,
                 'description' => $request->description,
                 'size_category' => $request->size_category,
                 'color_category' => $request->color_category,
                 'variation_category' => $request->variation_category,
-                'stock' => $request->stock,
                 'image' => $request->image
             ]);
 
@@ -64,6 +57,8 @@ class ProductController extends Controller
                     'size' => $sizeData['size'],
                     'stock' => $sizeData['stock'],
                     'price' => $sizeData['price'],
+                    'discount_price' => $sizeData['discount_price'],
+                    'source_price' => $sizeData['source_price'],
                 ]);
             }
 
@@ -86,7 +81,6 @@ class ProductController extends Controller
         foreach ($request->colors as $index => $colorData) {
             $productData = [
                 'name' => $request->name . ' - ' . $colorData['name'],
-                'slug' => Str::slug($request->name . '-' . $colorData['name']),
                 'small_description' => $request->small_description,
                 'price' => $request->price,
                 'discount_price' => $request->discount_price ?? 0,
@@ -131,11 +125,15 @@ class ProductController extends Controller
             $sizes = [];
             $rawSizes = $colorData['sizes'] ?? [];
 
+
             for ($i = 0; $i < count($rawSizes); $i += 2) {
                 if (isset($rawSizes[$i]['size']) && isset($rawSizes[$i + 1]['stock'])) {
                     $sizes[] = [
                         'size' => $rawSizes[$i]['size'],
                         'stock' => $rawSizes[$i + 1]['stock'],
+                        'price' => $rawSizes[$i + 2]['price'],
+                        'discount_price' => $rawSizes[$i + 3]['discount_price'],
+                        'source_price' =>  $rawSizes[$i + 4]['source_price']
                     ];
                 }
             }
@@ -145,6 +143,9 @@ class ProductController extends Controller
                     'product_id' => $colorProduct->id,
                     'size' => $sizeData['size'],
                     'stock' => $sizeData['stock'],
+                    'price'=> $sizeData['price'],
+                    'discount_price'=> $sizeData['discount_price'],
+                    'source_price' => $sizeData['source_price'],
                 ]);
             }
         }

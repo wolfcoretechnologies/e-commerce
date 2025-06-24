@@ -51,12 +51,6 @@
                         <label class="h4 text-blue">Product Name</label>
                         <input type="text" name="name" class="form-control" placeholder="Product Name">
                     </div>
-
-                    <div class="mb-3">
-                        <label class="h4 text-blue">Slug</label>
-                        <input type="text" name="slug" class="form-control" placeholder="Slug">
-                    </div>
-
                     <div class="mb-3">
                         <label class="h4 text-blue">Short Description</label>
                         <textarea name="small_description" class="form-control textarea_editor"
@@ -69,19 +63,6 @@
                             <!-- JS will add size-stock inputs here -->
                         </div>
                         <button type="button" class="btn btn-primary mt-2" onclick="addMainSize()">+ Add Size</button>
-                    </div>
-
-
-                    <div class="mb-3 row">
-                        <div class="col-md-6">
-                            <label class="h4 text-blue">Price</label>
-                            <input type="number" step="0.01" name="price" class="form-control" placeholder="Price">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="h4 text-blue">Discount Price</label>
-                            <input type="number" step="0.01" name="discount_price" class="form-control"
-                                placeholder="Discount Price">
-                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -101,11 +82,6 @@
                             <input type="text" name="variation_category" class="form-control"
                                 placeholder="Variation Category">
                         </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="h4 text-blue">Stock</label>
-                        <input type="number" name="stock" class="form-control" placeholder="Stock">
                     </div>
 
                     <div class="mb-3">
@@ -169,16 +145,6 @@
                 </div>
             </div>
 
-            <div class="row mb-2">
-                <div class="col-md-6">
-                    <input type="number" step="0.01" name="colors[][price]" placeholder="Price" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <input type="number" step="0.01" name="colors[][discount_price]" placeholder="Discount Price"
-                        class="form-control">
-                </div>
-            </div>
-
             <div class="mb-2">
                 <textarea name="colors[][description]" class="form-control textarea_editor"
                     placeholder="Full Description"></textarea>
@@ -195,18 +161,28 @@
     </template>
 
     <template id="size-template">
-        <div class="size-row d-flex gap-2 mb-2">
-            <div class="col-md-6">
+        <div class="mb-3 row">
+            <div class="col-md-2">
                 <input type="text" name="size" placeholder="Size (e.g. M)" class="form-control">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <input type="number" name="stock" placeholder="Stock" class="form-control">
             </div>
+            <div class="col-md-2">
+                <input type="number" name="price" placeholder="Price" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="number" name="discount_price" placeholder="Discount price" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="number" name="source_price" placeholder="Source price" class="form-control">
+            </div>
         </div>
+
     </template>
 
     <template id="main-size-template">
-        <div class="size-row d-flex gap-2 mb-2">
+        <div class="mb-3 row">
             <div class="col-md-4">
                 <input type="text" name="sizes[][size]" placeholder="Size (e.g. M)" class="form-control">
             </div>
@@ -215,6 +191,10 @@
             </div>
             <div class="col-md-4">
                 <input type="number" step="0.01" name="sizes[][price]" placeholder="Price" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <input type="number" step="0.01" name="sizes[][discount_price]" placeholder="Discount Price"
+                    class="form-control">
             </div>
         </div>
     </template>
@@ -225,13 +205,7 @@
         <script src="{{ asset('src/plugins/dropzone/src/dropzone.js') }}"></script>
         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.textarea_editor').summernote({
-                    height: 200
-                });
-            });
-        </script>
+
 
         <script>
 
@@ -239,25 +213,31 @@
 
             function addMainSize() {
                 const container = document.getElementById('main-size-container');
-
                 const row = document.createElement('div');
-                row.classList.add('size-row', 'd-flex', 'gap-2', 'mb-2');
+                row.classList.add('mb-3', 'row');
 
                 row.innerHTML = `
-                                                                                <div class="col-md-4">
-                                                                                    <input type="text" name="sizes[${mainSizeIndex}][size]" placeholder="Size (e.g. M)" class="form-control" required>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <input type="number" name="sizes[${mainSizeIndex}][stock]" placeholder="Stock" class="form-control" required>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <input type="number" step="0.01" name="sizes[${mainSizeIndex}][price]" placeholder="Price" class="form-control" required>
-                                                                                </div>
-                                                                            `;
+                                                <div class="col-md-2">
+                                                    <input type="text" name="sizes[${mainSizeIndex}][size]" placeholder="Size (e.g. M)" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="number" name="sizes[${mainSizeIndex}][stock]" placeholder="Stock" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="number" step="0.01" name="sizes[${mainSizeIndex}][price]" placeholder="Price" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="number" step="0.01" name="sizes[${mainSizeIndex}][discount_price]" placeholder="Discount Price" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="number" step="0.01" name="sizes[${mainSizeIndex}][source_price]" placeholder="Source Price" class="form-control" required>
+                                                </div>
+                                            `;
 
                 container.appendChild(row);
                 mainSizeIndex++;
             }
+
 
 
             Dropzone.autoDiscover = false;
@@ -268,6 +248,7 @@
                 method: 'POST',
                 params: { folder: 'products' },
                 autoProcessQueue: true,
+                addRemoveLinks: false,
                 maxFiles: 1,
                 acceptedFiles: "image/*",
                 headers: {
@@ -292,6 +273,17 @@
                             preview.classList.remove('d-none');
                         };
                         reader.readAsDataURL(file);
+
+                        const dzPreview = file.previewElement;
+                        const removeBtn = dzPreview.querySelector('.dz-remove-custom');
+                        if (removeBtn) {
+                            removeBtn.addEventListener('click', () => {
+                                mainDropzone.removeFile(file);
+                                document.getElementById('mainPreview').classList.add('d-none');
+                                document.getElementById('mainPreview').src = '';
+                                document.getElementById('imageInput').value = ''; // Clear hidden input
+                            });
+                        }
                     });
                 }
             });
@@ -341,11 +333,14 @@
                 galleryInput.name = `colors[${colorIndex}][gallery]`;
 
                 // Update extra fields (price, discount, description)
-                colorBlock.querySelector('input[placeholder="Price"]').name = `colors[${colorIndex}][price]`;
-                colorBlock.querySelector('input[placeholder="Discount Price"]').name = `colors[${colorIndex}][discount_price]`;
                 colorBlock.querySelector('textarea[placeholder="Full Description"]').name = `colors[${colorIndex}][description]`;
-                colorBlock.querySelector('textarea[placeholder="Full Description"]').classList = `textarea_editor`;
-                // Assign unique Dropzone IDs
+                // Get the textarea and assign attributes
+                const descriptionTextarea = colorBlock.querySelector('textarea[placeholder="Full Description"]');
+                descriptionTextarea.name = `colors[${colorIndex}][description]`;
+                descriptionTextarea.classList.add('textarea_editor');
+
+
+
                 dropzoneDiv.id = `dropzone-${colorIndex}`;
                 galleryDropzoneDiv.id = `gallery-dropzone-${colorIndex}`;
 
@@ -389,6 +384,10 @@
 
                 // Add color block to container
                 document.getElementById('color-container').appendChild(colorBlock);
+                // Initialize Summernote only on this textarea
+                $(descriptionTextarea).summernote({
+                    height: 200
+                });
                 colorIndex++;
             }
 
@@ -403,12 +402,15 @@
                 // Create new inputs with indexed names
                 sizeTemplate.querySelector('input[placeholder="Size (e.g. M)"]').name = `colors[${index}][sizes][][size]`;
                 sizeTemplate.querySelector('input[placeholder="Stock"]').name = `colors[${index}][sizes][][stock]`;
-
+                sizeTemplate.querySelector('input[ placeholder="Price"]').name = `colors[${index}][sizes][][price]`;
+                sizeTemplate.querySelector('input[ placeholder="Discount price"]').name = `colors[${index}][sizes][][discount_price]`;
+                sizeTemplate.querySelector('input[ placeholder="Source price"]').name = `colors[${index}][sizes][][source_price]`;
                 container.appendChild(sizeTemplate);
             }
 
 
         </script>
+
     @endsection
 
 @endsection

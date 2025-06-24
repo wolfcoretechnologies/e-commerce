@@ -37,6 +37,13 @@
 
         gtag('config', 'UA-119386393-1');
     </script>
+
+    <style>
+        .dz-success-mark,
+        .dz-error-mark {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
