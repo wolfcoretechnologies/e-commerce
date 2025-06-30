@@ -51,9 +51,13 @@ class PageController extends Controller
                 ]
             ];
         });
+        $relatedColorProducts = Products::where('color_category', $viewedProduct->color_category)
+            ->where('id', '!=', $viewedProduct->id) // exclude the current product
+            ->get();
 
 
-        return view('productdetail', compact('mainProduct', 'viewedProduct', 'productImages', 'colorProducts', 'sizes', 'sizePrices'));
+
+        return view('productdetail', compact('mainProduct', 'viewedProduct', 'productImages', 'colorProducts', 'sizes', 'sizePrices', 'relatedColorProducts'));
 
     }
 }
