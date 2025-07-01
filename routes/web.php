@@ -6,10 +6,16 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\ProductController;
-
+use App\Http\Controllers\Admin\ApiCredentialsConntroller;
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+//register
+Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [LoginController::class, 'register'])->name('register.store');
+
+
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
@@ -31,6 +37,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');
     Route::get('/admin/products/show', [ProductController::class, 'show'])->name('admin.products.show');
+
+    //api credentials
+    Route::get('/admin/apicredentials',[ApiCredentialsConntroller::class,'show'])->name('admin.api');
 
 });
 
@@ -54,4 +63,3 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 Route::get('/', [PageController::class, 'main'])->name('home');
 Route::get('/shop', [PageController::class, 'shop'])->name('shop');
 Route::get('/product/{id}', [PageController::class, 'productDetail'])->name('product.detail');
-
